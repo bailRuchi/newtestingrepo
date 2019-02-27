@@ -1,0 +1,73 @@
+<!--begin::Signin-->
+<div class="m-login__signin">
+	<div class="m-login__title">
+		<h3 class="m-login__title">Sign Up</h3>
+		<div class="m-login__desc">Enter your details to create your account:</div>
+	</div>
+	<!--begin::Form-->
+	<form class="m-login__form m-form" [formGroup]="regForm">
+		<div class="form-group">
+			<mat-form-field>
+				<mat-label>FirstName</mat-label>
+				<input matInput type="text" placeholder="FirstName" autocomplete="off" formControlName="firstName">
+				<mat-error *ngIf="!regForm.controls.firstName.valid && regForm.controls.firstName.dirty && regForm.value.firstName.length==0">
+					FirstName is <strong>required</strong>
+				</mat-error>
+			</mat-form-field>
+		</div>
+		<div class="form-group">
+			<mat-form-field>
+				<mat-label>LastName</mat-label>
+				<input matInput type="text" placeholder="LastName" autocomplete="off" formControlName="lastName">
+				<mat-error *ngIf="!regForm.controls.lastName.valid && regForm.controls.lastName.dirty && regForm.value.lastName.length==0">
+					LastName is <strong>required</strong>
+				</mat-error>
+			</mat-form-field>
+		</div>
+		<div class="form-group">
+			<mat-form-field>
+				<mat-label>Email</mat-label>
+				<input matInput type="email" name="email" placeholder="Email address" autocomplete="off" formControlName="email">
+				<mat-error *ngIf="!regForm.controls.email.valid && regForm.controls.email.dirty && regForm.value.email.length==0">
+					Email is <strong>required</strong>
+				</mat-error>
+				<mat-error *ngIf="regForm.controls.email.errors && regForm.controls.email.errors.email">
+					Email must be a valid email address
+				</mat-error>
+			</mat-form-field>
+		</div>
+		<div class="form-group">
+			<mat-form-field>
+				<mat-label>Password</mat-label>
+				<input matInput minlength="4" type="password" name="password" placeholder="Password" autocomplete="off" formControlName="password">
+				<mat-error *ngIf="!regForm.controls.password.valid && regForm.controls.password.dirty && regForm.value.password.length==0">
+					Password <strong>required</strong>
+				</mat-error>
+			</mat-form-field>
+		</div>
+		<div class="form-group">
+			<mat-form-field>
+				<mat-label>Confirm Password</mat-label>
+				<input matInput minlength="4" type="password" placeholder="Confirm password" autocomplete="off" formControlName="confirmPassword">
+				<mat-error *ngIf="regForm.controls.confirmPassword.errors?.MatchPassword">
+					<div padding margin-left class="red" [hidden]="regForm.controls.confirmPassword.value==''">
+						Confirm Password does not match with  Password</div>
+				</mat-error>
+			</mat-form-field>
+		</div>
+		<!-- <div class="form-group">
+			<mat-checkbox name="agree" required="true">I agree the
+				<a href="javascript:;">terms & conditions</a>
+			</mat-checkbox>
+		</div> -->
+	</form>
+	<!--end::Form-->
+
+	<!--begin::Action-->
+	<div class="m-login__action m-login__action--fit">
+		<button mat-button (click)="loginPage($event)" [disabled]="loading">Back</button>
+		<m-spinner-button [options]="spinner" (click)="onRegister(regForm.value)">Sign Up</m-spinner-button>
+	</div>
+	<!--end::Action-->
+</div>
+<!--end::Signin-->

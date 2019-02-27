@@ -1,0 +1,56 @@
+<!--begin::Signin-->
+<!--<div class="m-login__signin">-->
+<div class="m-login__title">
+	<h3>Login Account</h3>
+</div>
+
+<!-- <m-auth-notice></m-auth-notice> -->
+
+<!--begin::Form-->
+<form class="m-login__form m-form" name="form" novalidate [formGroup]="loginForm">
+	<div class="form-group">
+		<mat-form-field>
+			<mat-label>Email</mat-label>
+			<input matInput type="text" name="email" placeholder="Email address" autocomplete="off" required formControlName="email">
+			<mat-error *ngIf="!loginForm.controls.email.valid && loginForm.controls.email.dirty && loginForm.value.email.length==0">
+				User Name is <strong>required</strong>
+			</mat-error>
+			<mat-error *ngIf="loginForm.controls.email.errors && loginForm.controls.email.errors.email">
+				Email must be a valid email address
+			</mat-error>
+		</mat-form-field>
+	</div>
+	<div class="form-group">
+		<mat-form-field>
+			<mat-label>Password</mat-label>
+			<input matInput minlength="3" type="password" name="password" placeholder="Password" autocomplete="off" required formControlName="password">
+			<mat-error *ngIf="!loginForm.controls.password.valid && loginForm.controls.password.dirty && loginForm.value.password.length==0">
+				User Name is <strong>required</strong>
+			</mat-error>
+		</mat-form-field>
+	</div>
+	<!-- <div class="form-group">
+		<mat-checkbox [(ngModel)]="model.remember_me" #remember_me="ngModel" [ngModelOptions]="{standalone: true}">Keep me signed in</mat-checkbox>
+	</div> -->
+</form>
+<!--end::Form-->
+<!--begin::Options-->
+<div class="m-login__options">
+		<a (click)="submitLogin('facebook')" mat-raised-button color="primary">
+			<span>
+				<i class="fab fa-facebook-f"></i>&nbsp;
+				<span>Facebook</span>
+			</span>
+		</a>
+		<a (click)="submitLogin('google')" mat-raised-button color="warn">
+			<span>
+				<i class="fab fa-google"></i>&nbsp;
+				<span>Google</span>
+			</span>
+		</a>
+	</div>
+	<!--end::Options-->
+<!--begin::Action-->
+<div class="m-login__action m-login__action--fit">
+	<m-spinner-button [options]="spinner" (click)="onLogin(loginForm.value)">Login</m-spinner-button>
+</div>
