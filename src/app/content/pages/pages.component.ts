@@ -1,4 +1,5 @@
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
+import { startWith, tap, delay } from 'rxjs/operators';
 import {
 	Component,
 	OnInit,
@@ -16,6 +17,7 @@ import { BehaviorSubject } from 'rxjs';
 import { LayoutRefService } from '../../core/services/layout/layout-ref.service';
 import { AnimationBuilder, AnimationPlayer, style, animate } from '@angular/animations';
 import { TranslationService } from '../../core/services/translation.service';
+import { LoadingService } from '../../core/auth/loading.service';
 
 @Component({
 	selector: 'm-pages',
@@ -28,7 +30,6 @@ export class PagesComponent implements OnInit, AfterViewInit {
 	@Input() asideLeftDisplay: any;
 	@Input() asideRightDisplay: any;
 	@Input() asideLeftCloseClass: any;
-
 	public player: AnimationPlayer;
 
 	// class for the header container
@@ -36,7 +37,6 @@ export class PagesComponent implements OnInit, AfterViewInit {
 
 	@ViewChild('mContentWrapper') contenWrapper: ElementRef;
 	@ViewChild('mContent') mContent: ElementRef;
-
 	constructor(
 		private el: ElementRef,
 		private configService: LayoutConfigService,
@@ -45,6 +45,8 @@ export class PagesComponent implements OnInit, AfterViewInit {
 		private layoutRefService: LayoutRefService,
 		private animationBuilder: AnimationBuilder,
 		private translationService: TranslationService,
+		private _loadingService: LoadingService
+
 	) {
 		this.configService.onLayoutConfigUpdated$.subscribe(model => {
 			const config = model.config;
@@ -84,7 +86,7 @@ export class PagesComponent implements OnInit, AfterViewInit {
 		});
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void { }
 
 	ngAfterViewInit(): void {
 		setTimeout(() => {

@@ -8,8 +8,10 @@ import {
 	RouteConfigLoadStart,
 	Router
 } from '@angular/router';
+import { startWith, tap, delay } from 'rxjs/operators';
 import { LayoutRefService } from '../../../core/services/layout/layout-ref.service';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import { LoadingService } from '../../../core/auth/loading.service';
 
 @Component({
 	selector: 'm-header',
@@ -17,15 +19,18 @@ import { LoadingBarService } from '@ngx-loading-bar/core';
 	styleUrls: ['./header.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeaderComponent implements OnInit, AfterViewInit {
 
+export class HeaderComponent implements OnInit, AfterViewInit {
+	
+	// loader: any;
 	@ViewChild('mHeader') mHeader: ElementRef;
 
 	constructor(
 		private router: Router,
 		private layoutRefService: LayoutRefService,
 		public headerService: HeaderService,
-		public loader: LoadingBarService
+		public loader: LoadingBarService,
+		private _loadingService: LoadingService
 	) {
 		// page progress bar percentage
 		this.router.events.subscribe(event => {
@@ -52,5 +57,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 	ngAfterViewInit(): void {
 		// keep header element in the service
 		this.layoutRefService.addElement('header', this.mHeader.nativeElement);
+		// this._loadingService.loader.pipe(
+		// 	startWith(null),
+		// 	delay(0),
+		// 	tap((loader) => this.loader = loader)
+		// ).subscribe();
 	}
 }

@@ -14,16 +14,18 @@ export const locale = {
 			DASHBOARD: 'Dashboard',
 			formbuilder: 'form-builder',
 			formrender: 'form-render',
-			formData: 'formData',
+			forms: 'Forms',
 		},
 		view:{
 			phoneview: 'Phoneview',
-			ipadView: 'ipadView',
-			desktop: 'desktop'
+			ipadView: 'IpadView',
+			desktop: 'Desktop'
 		},
         list: {
             listview: 'List',
-            gridview: 'Grid'
+			gridview: 'Grid',
+			reset: 'Reset',
+			buttonTitle:'Save Form'
         },
         formData: {
             Apply: 'Apply',

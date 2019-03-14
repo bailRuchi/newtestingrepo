@@ -1,0 +1,54 @@
+<div>
+	<div class="toolbarView">
+		<div class="m-subheader ">
+			<div class="d-flex align-items-center">
+				<div class="mr-auto">
+					<ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+						<li class="m-nav__item">
+							<button (click)="gridIcon()" mat-button color="primary"><i class="fa fa-th" [ngClass]="{'onActive':!isValue}"></i>
+								{{'list.listview' | translate}}</button>
+						</li>
+						<li class="m-nav__item">
+							<button (click)="icon()" mat-button color="primary"><i class="fa fa-id-badge" [ngClass]="{'onActive':!isValue}"></i>
+								{{'list.gridview' | translate}}</button>
+						</li>
+					</ul>
+				</div>
+
+				<ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+					<li class="m-nav__item vertical-align-super">
+						<button mat-raised-button color="warn" (click)="reset()">{{'list.reset' | translate}}</button>
+					</li>
+					<li class="m-nav__item vertical-align-super">
+						<button mat-raised-button color="primary" (click)="saveForm()">{{'list.buttonTitle' | translate}}</button>
+					</li>
+					<li class="m-nav__item">
+						<div class="m-dropdown__wrapper" style="z-index: 101;">
+							<span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust" style="left: auto; right: 21.5px;"></span>
+							<div class="m-dropdown__inner">
+								<div class="m-dropdown__body">
+									<div class="form-group m-form__group">
+										<select class="form-control m-input" [(ngModel)]="selectedView" (ngModelChange)="changeView()">
+											<option [value]="'mobile'">{{ 'view.phoneview' | translate}}</option>
+											<option [value]="'i-pad'">{{ 'view.ipadView' | translate}}</option>
+											<option [value]="'desktop'">{{ 'view.desktop' | translate}}</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- <img src="../../../../../../assets/img/Mann-India-logo-new.png"> -->
+	<div class="form-io-altered container-fluid">
+		<form-builder [form]="form" (change)="onChange($event)" (submit)="onSubmit($event)"></form-builder>
+	</div>
+	<pre id="json" class="none"><code class="language-json" #json></code></pre>
+</div>

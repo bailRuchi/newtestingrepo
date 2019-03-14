@@ -49,8 +49,6 @@ export class MenuHorizontalComponent implements OnInit, AfterViewInit {
 
 	ngOnInit(): void {
 		this.currentRouteUrl = this.router.url;
-		console.log("this.menuHorService",this.menuHorService.menuList$)
-
 		this.menuHorService.menuList$.subscribe(menuItems => {
 			this.fillAsides(menuItems)});
 

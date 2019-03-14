@@ -1,0 +1,137 @@
+.m-nav__item {
+	margin-left: 23px;
+}
+
+.onActive {
+	color: #5867dd;
+}
+
+// .form-io-altered {
+.form-io-mobile {
+	background: url('assets/img/phone.png');
+	height: 520px;
+	background-repeat: no-repeat;
+	max-width: 414px;
+	background-size: contain;
+	position: relative;
+	margin: 0 auto;
+}
+
+.form-io-mobile .formarea.drag-container {
+	position: relative;
+	width: 225px;
+	top: 60px;
+	left: 2px;
+	height: 400px;
+	max-height: 400px;
+	min-height: 400px !important;
+	overflow-y: auto;
+}
+
+
+.form-io-mobile .formarea.drag-container::-webkit-scrollbar-thumb {
+	background: transparent;
+}
+
+.form-io-Ipad {
+	background: url('assets/img/ipad.png');
+	height: 310px;
+	background-repeat: no-repeat;
+	max-width: 440px;
+	background-size: contain;
+	position: relative;
+	left: 20%;
+	right: 20%;
+	top: 25px;
+}
+
+.form-io-Ipad .formarea.drag-container {
+	width: 384px;
+	top: 21px;
+	right: 0px;
+	max-width: 88%;
+	left: 25px;
+	margin: 0px;
+	max-height: 258px;
+	min-height: 258px !important;
+	overflow-y: auto;
+}
+
+/* FormIO Icon Manipulation */
+
+.icon-view span.formcomponent.drag-copy {
+	font-size: 0;
+	width: 33px;
+	display: inline-block;
+}
+
+i {
+	font-size: 18px;
+}
+
+span.formcomponent.drag-copy {
+	padding: 10px;
+}
+
+.btn-primary {
+	background: slategray;
+	border: slategray;
+}
+	.vertical-align-super{
+		vertical-align: super !important ;
+	}
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active,
+.show>.btn-primary.dropdown-toggle :active {
+	background: slategray;
+	border: slategray;
+}
+
+.icon-view span.formcomponent.drag-copy:not(:last-child) {
+	margin-right: 3px;
+}
+
+.icon-view span.formcomponent.drag-copy i {
+	font-size: initial;
+}
+
+.formio-dialog.formio-dialog-theme-default {
+	padding-bottom: unset !important;
+	padding-top: unset !important;
+}
+
+.formio-dialog-content {
+	max-height: 80vh;
+	top: 15%;
+}
+
+.formcomponents {
+	flex: 0 0 25% !important;
+	max-width: 25% !important;
+}
+
+.m-subheader {
+	padding: unset !important;
+}
+
+.tab-content {
+	overflow-y: auto;
+	max-height: 58vh;
+}
+
+.pull-right {
+	display: none;
+}
+
+.formarea {
+	max-width: 70.33333%;
+}
+
+.btn-block:hover {
+	background: #798188;
+}
+
+.formcomponentsDisplay {
+	display: none !important;
+}
+

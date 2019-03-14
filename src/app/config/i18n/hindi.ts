@@ -15,6 +15,7 @@ export const locale = {
             formbuilder: 'फार्म बिल्डर',
             formrender: 'प्रपत्र प्रस्तुत करना',
             formData: 'प्रपत्र डेटा',
+            forms: 'प्रपत्र',
         },
         view: {
             phoneview: 'फ़ोन दृश्य',
@@ -23,7 +24,9 @@ export const locale = {
         },
         list: {
             listview: 'सूची',
-            gridview: 'ग्रिड'
+            gridview: 'ग्रिड',
+            reset: 'रीसेट',
+			buttonTitle:'प्रपत्र सहेजें'
         },
         formData: {
             Apply: 'लागू करें',

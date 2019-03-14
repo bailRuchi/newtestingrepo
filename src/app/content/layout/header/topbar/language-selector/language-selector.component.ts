@@ -1,11 +1,11 @@
 import { filter } from 'rxjs/operators';
-import { Component, ElementRef, HostBinding, OnInit } from '@angular/core';
+import { Component, ElementRef, HostBinding, OnInit} from '@angular/core';
 import { TranslationService } from '../../../../../core/services/translation.service';
 import { NavigationStart, Router } from '@angular/router';
 
 interface LanguageFlag {
 	lang: string;
-	country: string;
+	country_lang: string;
 	active?: boolean;
 }
 
@@ -19,14 +19,15 @@ export class LanguageSelectorComponent implements OnInit {
 	@HostBinding('class') classes = 'm-nav__item m-topbar__languages m-dropdown m-dropdown--small m-dropdown--arrow m-dropdown--align-right m-dropdown--header-bg-fill m-dropdown--mobile-full-width';
 	@HostBinding('attr.m-dropdown-toggle') mDropdownToggle = 'click';
 	language: LanguageFlag;
+
 	languages: LanguageFlag[] = [
 		{
 			lang: 'en',
-			country: 'english',
+			country_lang: 'English',
 		},
 		{
 			lang: 'hindi',
-			country: 'Hindi',
+			country_lang: 'हिंदी',
 		},
 	];
 
@@ -34,7 +35,7 @@ export class LanguageSelectorComponent implements OnInit {
 		private translationService: TranslationService,
 		private router: Router,
 		private el: ElementRef
-	) {}
+	) { }
 
 	ngOnInit() {
 		this.setSelectedLanguage();
@@ -55,14 +56,12 @@ export class LanguageSelectorComponent implements OnInit {
 			}
 		});
 		this.translationService.setLanguage(lang);
-
+		this.translationService.eventForlanguageChange(lang);
 		(<DOMTokenList>this.el.nativeElement.classList).remove('m-dropdown--open');
 	}
 
 	setSelectedLanguage(): any {
 		this.translationService.getSelectedLanguage().subscribe(lang => {
-			console.log(lang, "language");
-			
 			if (lang) {
 				setTimeout(() => {
 					this.setLanguage(lang);

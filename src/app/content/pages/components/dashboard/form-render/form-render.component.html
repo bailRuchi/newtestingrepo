@@ -1,7 +1,0 @@
-<div class="formRender" *ngIf="FormjsonData">
-	<formio [form]="form" (submit)="onSubmit($event)"></formio>
-</div>
-
-<div class="dataNotFound" *ngIf="!FormjsonData || FormjsonData.length == '2'">
-	<h1>Form not Created</h1>
-</div>

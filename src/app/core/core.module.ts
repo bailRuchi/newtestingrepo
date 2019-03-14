@@ -17,7 +17,6 @@ import { GetObjectPipe } from './pipes/get-object.pipe';
 import { ConsoleLogPipe } from './pipes/console-log.pipe';
 import { SafePipe } from './pipes/safe.pipe';
 import { PortletDirective } from './directives/portlet.directive';
-import { DialogService } from './services/dialog.service';
 import { LocalStorageService } from './services/local-storage.service';
 import { ResolverService } from './services/resolver.service';
 @NgModule({
@@ -64,6 +63,7 @@ import { ResolverService } from './services/resolver.service';
 		ConsoleLogPipe,
 		SafePipe
 	],
-	providers: [DialogService, LocalStorageService, ResolverService]
+	providers: [ LocalStorageService, ResolverService,
+	]
 })
 export class CoreModule { }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, of } from 'rxjs';
 
@@ -12,6 +12,7 @@ export interface Locale {
 })
 export class TranslationService {
 	private langIds: any = [];
+	@Output() updateLang = new EventEmitter();
 
 	constructor(private translate: TranslateService) {
 		// add new langIds to the list
@@ -42,7 +43,9 @@ export class TranslationService {
 			localStorage.setItem('language', lang);
 		}
 	}
-
+	eventForlanguageChange(lang) {
+		this.updateLang.emit(lang);
+	}
 	public getSelectedLanguage(): Observable<any> {
 		return of(localStorage.getItem('language') || this.translate.getDefaultLang());
 	}

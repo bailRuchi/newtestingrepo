@@ -40,8 +40,8 @@ export class LayoutConfig implements ConfigModel {
 					}
 				},
 				logo: {
-					// dark: './assets/logo.png',
-					// light: './assets/logo.png'
+					dark: './assets/img/Mann-India-logo-new.png',
+					light: './assets/img/Mann-India-logo-new.png'
 				}
 			},
 
@@ -67,7 +67,7 @@ export class LayoutConfig implements ConfigModel {
 				//  Left aside minimize toggle
 				minimize: {
 					toggle: true, //  Allow minimize toggle(supported for desktop mode only)
-					default: false // Set left aside minimized by default
+					default: true // Set left aside minimized by default
 				}
 			},
 

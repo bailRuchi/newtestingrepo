@@ -10,7 +10,6 @@ import { Observable } from 'rxjs/Observable';
     canActivate(
       next: ActivatedRouteSnapshot,
       state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      console.log('state',this.snapShort.snapshot)
         if (localStorage.getItem('userInfo')) {
         return true;
       } else {

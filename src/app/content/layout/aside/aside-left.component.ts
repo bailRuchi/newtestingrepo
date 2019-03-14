@@ -26,38 +26,48 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 	insideTm: any;
 	outsideTm: any;
 	menuList = [
+		// {
+		// 	title: 'Dashboard',
+		// 	desc: 'Some description goes here',
+		// 	root: true,
+		// 	icon: 'flaticon-line-graph',
+		// 	page: '/',
+		// 	badge: { type: 'm-badge--danger', value: '2' },
+		// 	translate: 'MENU.DASHBOARD',
+		// },
 		{
-			title: 'Dashboard',
-			desc: 'Some description goes here',
-			root: true,
-			icon: 'flaticon-line-graph',
-			page: '/dashboard',
-			badge: { type: 'm-badge--danger', value: '2' },
-			translate: 'MENU.DASHBOARD',
-			submenu: [
-				{
-					title: 'Form-builder',
-					bullet: 'dot',
-					page: '/',
-					translate: 'MENU.formbuilder'
-				},
-				{
-					title: 'Form-render',
-					bullet: 'dot',
-					page: '/form-render',
-					translate: 'MENU.formrender'
-				},
-
-			]
-		},
-		{
-			title: 'Form Data',
+			title: 'Forms',
 			root: true,
 			bullet: 'dot',
-			icon: 'flaticon-interface-7',
-			page: '/formrecord',
-			translate: 'MENU.formData',
-		}
+			icon: 'flaticon-list-1',
+			page: '/forms',
+			translate: 'MENU.forms',
+			// submenu: [
+			// 	{
+			// 		title: 'Form Data',
+			// 		bullet: 'dot',
+			// 		page: '/formrecord/data-list',
+			// 		translate: 'MENU.formData'
+			// 	},
+			// {
+			// 	title: 'Form-builder',
+			// 	bullet: 'dot',
+			// 	page: '/form-builder',
+			// 	translate: 'MENU.formbuilder'
+			// },
+			// {
+			// 	title: 'Form-render',
+			// 	bullet: 'dot',
+			// 	page: '/form-render',
+			// 	translate: 'MENU.formrender'
+			// },
+			// {
+			// 	title: 'Select List',
+			// 	bullet: 'dot',
+			// 	page: '/formrecord/user-select-list',
+			// },
+			// ]
+		},
 	];
 	constructor(
 		private el: ElementRef,
@@ -94,8 +104,8 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 			.pipe(filter(event => event instanceof NavigationEnd))
 			.subscribe(event => this.currentRouteUrl = this.router.url.split(/[?#]/)[0]);
 		try {
-			const allTags = await this._apiService.getAllTagsMain();
-			this.formatMenu(allTags['data']);
+			// const allTags = await this._apiService.getAllTagsMain();
+			// this.formatMenu(allTags['data']);
 		} catch (e) {
 			console.error(e);
 		}

@@ -1,7 +1,6 @@
 <!-- begin:: Page -->
 <ng-container *ngIf="selfLayout !== 'blank' ; else selfLayoutBlank">
 	<m-header></m-header>
-
 	<!-- begin::Body -->
 	<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body" [ngClass]="pageBodyClass$ | async">
 		<!-- BEGIN:: Aside Left -->
@@ -23,7 +22,7 @@
 	<!-- end:: Body -->
 
 	<m-footer></m-footer>
-	<m-scroll-top></m-scroll-top>
+	<!-- <m-scroll-top></m-scroll-top> -->
 </ng-container>
 
 <ng-template #selfLayoutBlank>

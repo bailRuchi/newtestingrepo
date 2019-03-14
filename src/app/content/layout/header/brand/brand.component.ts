@@ -12,7 +12,7 @@ import { DOCUMENT } from '@angular/common';
 export class BrandComponent implements OnInit {
 	@HostBinding('class') classes = 'm-stack__item m-brand';
 	@Input() menuAsideLeftSkin: any = '';
-	@Input() menuAsideMinimizeDefault: any = false;
+	@Input() menuAsideMinimizeDefault: any = true;
 	@Input() menuAsideMinimizToggle: any = false;
 	@Input() menuAsideDisplay: any = false;
 	@Input() menuHeaderDisplay: any = true;

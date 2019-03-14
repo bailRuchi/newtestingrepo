@@ -13,15 +13,14 @@ const routes: Routes = [
 		children: [
 			{
 				path: '',
-				loadChildren: './components/dashboard/dashboard.module#DashboardModule'
+				// loadChildren: './components/dashboard/dashboard.module#DashboardModule'
+				redirectTo: 'forms',
+				pathMatch: 'full'
 			}, {
-				path: 'formrecord',
-				loadChildren: './components/form-data/form-data.module#FormDataModule'
+				path: 'forms',
+				loadChildren: './components/forms/forms.module#FormDataModule'
 			},
-			{
-				path: 'settings',
-				loadChildren: './components/settings/settings.module#SettingsModule'
-			},
+
 		]
 	},
 	{

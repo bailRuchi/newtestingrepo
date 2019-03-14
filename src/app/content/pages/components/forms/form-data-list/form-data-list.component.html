@@ -1,0 +1,29 @@
+<div>
+	<div class="m-subheader ">
+		<div class="d-flex align-items-center">
+			<div class="mr-auto">
+			</div>
+			<button class="mb-4"  mat-raised-button color="primary" (click)="openDialog()">
+				Create New Form
+				<i class="fa fa-plus" aria-hidden="true"></i>
+			</button>
+			<!-- [routerLink]="['/forms/form-builder']" -->
+		</div>
+	</div>
+	<!-- (click)="OnFormRender()" -->
+	<mat-card class="card" *ngFor="let data of serviceList">
+		<mat-card-content class="cardContent">
+			<div>
+				<b>{{data.resourceGroupName}}</b>
+				<div class="font-color">{{data.formName}}</div>
+				<div class="font-color">{{data.formDesc}}</div>
+				<div><img  [src]="(data.formLogo)"></div>
+			</div>
+			<div>
+				<button mat-button color="primary" (click)="OnClickEdit()">EDIT</button>
+				<button mat-button color="accent" (click)="selectUserData(data.resourceGroupId)">DATA SUBMISSION</button>
+				<button mat-button color="warn" (click)="deleteDilogBox(data.resourceGroupId)">DELETE</button>
+			</div>
+		</mat-card-content>
+	</mat-card>
+</div>

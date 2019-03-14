@@ -1,0 +1,14 @@
+.card {
+	margin-bottom: 10px;
+
+	.data-render {
+		float: right
+	}
+	.cardContent {
+		display: flex;
+		justify-content: space-between;
+	}
+	.font-color{
+		color: #5d5d5d;
+	}
+}
