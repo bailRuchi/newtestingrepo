@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ElementRef, ViewChild, AfterViewInit, Input, ViewEncapsulation } from '@angular/core';
 import { SubheaderService } from '../../../../../core/services/layout/subheader.service';
 import { field } from '../../../../../../assets/builderComponent'
-import { userJson } from '../../../../../../assets/userJsonData'
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GetDataToResolverService } from '../../../../../core/services/get-data-to-resolver.service'
@@ -14,7 +13,7 @@ import { Field_Hi, Form_Hi, Button_Hi } from '../../../../../config/i18n/compone
 import { Field_En, Form_En, Button_En } from '../../../../../config/i18n/component_en';
 import { Formio } from 'formiojs';
 import { Location } from '@angular/common';
-import { variable } from '@angular/compiler/src/output/output_ast';
+
 @Component({
 	selector: 'm-form',
 	templateUrl: './form-builder.component.html',
@@ -28,12 +27,12 @@ export class FormCreateComponent implements OnInit, AfterViewInit {
 	isValue: boolean;
 	disableData: any;
 	view = 'phoneview';
-	public form: Object = {}
+	public form: Object = {
+
+	}
 	public config: any;
 	formTemplate = {};
 	buttonTitle = "Save Form";
-	imageBase64:string;
-	checked = false;
 	constructor(
 		private router: Router,
 		private configService: LayoutConfigService,
@@ -43,30 +42,11 @@ export class FormCreateComponent implements OnInit, AfterViewInit {
 		private formDataService: GetDataToResolverService,
 		private translationService: TranslationService,
 		private apiService: ApiService,
-		private location: Location
+		private location :Location
 	) {
 		if (this.route.snapshot.params.id) {
 			this.buttonTitle = "Update Form";
 		}
-	}
-	async ngOnInit() {
-		this.translationService.updateLang.subscribe(res => {
-			this.setToolbarInComponentListAndTranslate(res);
-		})
-
-		try {
-			// if (this.route.snapshot.data) {
-			// 	this.FormjsonData = this.route.snapshot.data;
-			// 	this.form['components'] = JSON.parse(this.FormjsonData.message);
-			// }
-			if (this.route.snapshot.params.id) {
-				if (localStorage.getItem('canActivate')) {
-					this.FormjsonData = userJson;
-					this.form['components'] = this.FormjsonData.userData;
-				}
-			}
-		}
-		catch (e) { }
 	}
 
 
@@ -76,6 +56,8 @@ export class FormCreateComponent implements OnInit, AfterViewInit {
 			this.changeView();
 			this.setToolbarInComponentListAndTranslate(localStorage.getItem('language'));
 		})
+		console.log(Formio.edit);
+		
 	}
 
 	setToolbarInComponentListAndTranslate(lang) {
@@ -116,33 +98,50 @@ export class FormCreateComponent implements OnInit, AfterViewInit {
 	}
 
 
+	async ngOnInit() {
+		// if (localStorage.length) {
+		// 	this.FormjsonData = localStorage.getItem('event')
+		// 	this.form['components'] = JSON.parse(this.FormjsonData);
+		// }
+		this.translationService.updateLang.subscribe(res => {
+			this.setToolbarInComponentListAndTranslate(res);
+		})
+
+		try {
+			if (this.route.snapshot.data) {
+				this.FormjsonData = this.route.snapshot.data;
+				this.form['components'] = JSON.parse(this.FormjsonData.message);
+			}
+		}
+		catch (e) { }
+	}
 
 	async onChange(event) {
+		console.log("event call",event)
 		this.translateForm(localStorage.getItem('language'));
 		try {
 			this.jsonElement.nativeElement.innerHTML = '';
 			this.jsonElement.nativeElement.appendChild(document.createTextNode(JSON.stringify(event.form, null, 4)));
+			// localStorage.setItem("event", JSON.stringify(event.form['components'], null, 4))
 			this.formDataService.setFormRenderData(JSON.stringify(event.form['components'], null, 4))
 			this.formTemplate = JSON.stringify(event.form['components'], null, 4);
-			localStorage.setItem("event", JSON.stringify(event.form.components, null, 4))
 		}
 		catch (e) {
 
 		}
 	}
-	canDeactivate() {
-		return this.checked;
-	}
+
 	saveForm() {
-		this.checked = true;
-		if (this.buttonTitle != "Save Form") {
-			this.editForm();
-			return false;
-		}
+		// if (this.buttonTitle != "Save Form") {
+		// 	this.editForm();
+		// 	return false;
+		// }
 		$('.fa-cog').click();
 		$('.formio-dialog-overlay').click();
+		console.log("JSON.stringify(event.form['components'], null, 4)",this.formTemplate)
 	}
 	editForm() {
+		console.log("edit call")
 	}
 	reset() {
 		this.form = {};
@@ -152,19 +151,11 @@ export class FormCreateComponent implements OnInit, AfterViewInit {
 			let title = $(this).text().trim();
 			if (lang == 'en') {
 				if (Form_En['data'][title]) {
-					if ($(this).find('span').text()) {
-						$(this).find('span').text(Form_En['data'][title])
-					} else {
-						$(this).text(Form_En['data'][title])
-					}
+					$(this).text(Form_En['data'][title])
 				}
 			} else {
 				if (Form_Hi['data'][title]) {
-					if ($(this).find('span').text()) {
-						$(this).find('span').text(Form_Hi['data'][title])
-					} else {
-						$(this).text(Form_Hi['data'][title])
-					}
+					$(this).text(Form_Hi['data'][title])
 				}
 			}
 		})
@@ -178,7 +169,6 @@ export class FormCreateComponent implements OnInit, AfterViewInit {
 				formioBuilder.unwrap();
 			}
 			formioBuilder.wrap('<div class="form-io-mobile col-xs-8 col-sm-9 col-md-10"></div>');
-			// formioBuilder.wrap('<div class=""><img  src="../../../../../../assets/img/Mann-India-logo-new.png"></div>');
 		} else if (this.selectedView == "i-pad") {
 			if ($(".form-io-altered").find(".form-io-mobile").length) {
 				formioBuilder.unwrap();

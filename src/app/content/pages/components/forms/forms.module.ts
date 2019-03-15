@@ -19,7 +19,14 @@ import { FormRenderComponent } from './form-render/form-render.component';
 import { FormCreateComponent } from './form-builder/form-builder.component';
 import { CreateNewFormDilogComponent } from './create-new-form-dilog/create-new-form-dilog.component';
 import { ConfirmDeleteDilogBoxComponent } from './confirm-delete-dilog-box/confirm-delete-dilog-box.component'
-import './form-builder/uploadLogo';
+<<<<<<< .mine
+||||||| .r81
+
+=======
+import { AuthGuardService } from './guards/auth-guard.service';
+import { CanActivateRouteGuard } from './guards/deactive.service';
+
+>>>>>>> .r87
 @NgModule({
   imports: [
     CommonModule,
@@ -36,30 +43,40 @@ import './form-builder/uploadLogo';
       {
         path: '',
         component: FormsDataComponent,
+        // canDeactivate: [DeactivateGuardService],
         children: [{
           path: '',
+          redirectTo: 'form-data-list',
+          pathMatch: 'full'
+        }, {
+          path: 'form-data-list',
           component: FormsDataListComponent,
+        }, {
+          path: 'form-render/:id',
+          component: FormRenderComponent,
+          resolve: { message: ResolverService }
+        },
+        {
+          path: 'form-builder',
+          component: FormCreateComponent,
+          canDeactivate: [CanActivateRouteGuard],
+          canActivate: [AuthGuardService],
+          resolve: { message: ResolverService }
+
+        }, {
+          path: 'form-builder/:id',
+          component: FormCreateComponent,
+          // canDeactivate: [DeactivateGuardService],
+          resolve: { message: ResolverService }
+        },
+        {
+          path: 'form-data/:id',
+          // canDeactivate: [DeactivateGuardService],
+          component: FormDataComponent,
         }]
       },
 
-      {
-        path: 'form-render/:id',
-        component: FormRenderComponent,
-        resolve: { message: ResolverService }
-      },
-      {
-        path: 'form-builder',
-        component: FormCreateComponent,
-        resolve: { message: ResolverService }
-      }, {
-        path: 'form-builder/:id',
-        component: FormCreateComponent,
-        resolve: { message: ResolverService }
-      },
-      {
-        path: 'form-data/:id',
-        component: FormDataComponent,
-      },
+
 
     ])
   ],
@@ -75,6 +92,7 @@ import './form-builder/uploadLogo';
     ResolverService,
     GetDataToResolverService,
     ApiService,
+    AuthGuardService
   ],
   declarations: [
     FormsDataComponent, 

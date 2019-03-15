@@ -1,9 +1,8 @@
-<div class="formRender" *ngIf="form['components'] && form['components'].length">
-	<!-- <img src="../../../../../../assets/img/Mann-India-logo-new.png"> -->
-	<formio [form]="formData" (submit)="onSubmit($event)" (change)="onChange($event)" (submit)="saveFormData($event)" [submission]='formSubmissionData' >
+<div class="formRender">
+	<formio [form]="formData" (submit)="onSubmit($event)" (change)="onChange($event)"[submission]='formSubmissionData' >
 	</formio>
 </div>
 
-<div class="dataNotFound" *ngIf="FormjsonData && FormjsonData.length==0">
+<!-- <div class="dataNotFound" *ngIf="FormjsonData && FormjsonData.length==0">
 	<h1>Form not Created</h1>
-</div>
+</div> -->

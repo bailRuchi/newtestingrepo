@@ -33,7 +33,6 @@ export class FormCreateComponent implements OnInit, AfterViewInit {
 	formTemplate = {};
 	buttonTitle = "Save Form";
 	imageBase64:string;
-	checked = false;
 	constructor(
 		private router: Router,
 		private configService: LayoutConfigService,
@@ -68,7 +67,6 @@ export class FormCreateComponent implements OnInit, AfterViewInit {
 		}
 		catch (e) { }
 	}
-
 
 	ngAfterViewInit() {
 		setTimeout(() => {
@@ -114,9 +112,6 @@ export class FormCreateComponent implements OnInit, AfterViewInit {
 		})
 		this.changeComponentList();
 	}
-
-
-
 	async onChange(event) {
 		this.translateForm(localStorage.getItem('language'));
 		try {
@@ -130,15 +125,8 @@ export class FormCreateComponent implements OnInit, AfterViewInit {
 
 		}
 	}
-	canDeactivate() {
-		return this.checked;
-	}
+
 	saveForm() {
-		this.checked = true;
-		if (this.buttonTitle != "Save Form") {
-			this.editForm();
-			return false;
-		}
 		$('.fa-cog').click();
 		$('.formio-dialog-overlay').click();
 	}
@@ -152,19 +140,11 @@ export class FormCreateComponent implements OnInit, AfterViewInit {
 			let title = $(this).text().trim();
 			if (lang == 'en') {
 				if (Form_En['data'][title]) {
-					if ($(this).find('span').text()) {
-						$(this).find('span').text(Form_En['data'][title])
-					} else {
-						$(this).text(Form_En['data'][title])
-					}
+					$(this).text(Form_En['data'][title])
 				}
 			} else {
 				if (Form_Hi['data'][title]) {
-					if ($(this).find('span').text()) {
-						$(this).find('span').text(Form_Hi['data'][title])
-					} else {
-						$(this).text(Form_Hi['data'][title])
-					}
+					$(this).text(Form_Hi['data'][title])
 				}
 			}
 		})

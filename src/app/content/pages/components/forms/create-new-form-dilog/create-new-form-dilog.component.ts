@@ -37,11 +37,11 @@ export class CreateNewFormDilogComponent implements OnInit {
   
   public async onSubmit(formData) {
     try {
-      this.router.navigate(["/forms/form-builder"]);
-      this.dialogRef.close();
+      // this.router.navigate(["/forms/form-builder"]);
+      this.dialogRef.close('true');
     } catch (error) {
       console.log(error);
     }
-    this.dialogRef.close();
+    // this.dialogRef.close();
   }
 }

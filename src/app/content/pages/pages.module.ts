@@ -13,6 +13,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterseptorService } from '../../core/auth/interseptor.service';
 import { ErrorInterseptorService } from '../../core/auth/error-interseptor.service';
 import { MatSnackBarModule, MatProgressBarModule } from '@angular/material';
+
 @NgModule({
 	declarations: [
 		PagesComponent,

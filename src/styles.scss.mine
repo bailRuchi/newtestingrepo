@@ -63,22 +63,3 @@
 .tr.mat-header-row {
 	background: #e4e2e2 !important;
 }
-<<<<<<< .mine
-||||||| .r81
-
-.abc {
-	background: red;
-}
-// .active-link {
-// 	background: red !important;
-// }=======
-
-.red {
-	background: red;
-}
-.bold {
-	font-weight: 800;
-}
-// .active-link {
-// 	background: red !important;
-// }>>>>>>> .r87

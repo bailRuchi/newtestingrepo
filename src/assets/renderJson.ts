@@ -1,7 +1,7 @@
 export const render = {
     "components": [
         {
-            "key": "textArea3",
+            "key": "textArea",
             "label": "Text Area",
             "background": "#ffffff",
             "textColor": "#000000",
@@ -140,7 +140,7 @@ export const render = {
             "tableView": true
         },
         {
-            "key": "textArea2",
+            "key": "textArea",
             "label": "Text Area",
             "background": "#ffffff",
             "textColor": "#000000",

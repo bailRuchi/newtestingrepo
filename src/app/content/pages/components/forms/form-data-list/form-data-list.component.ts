@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { serviceFormList } from '../../../../../../assets/serviceFormsFDOList'
 import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { CreateNewFormDilogComponent } from '../create-new-form-dilog/create-new-form-dilog.component';
 import { ConfirmDeleteDilogBoxComponent } from '../confirm-delete-dilog-box/confirm-delete-dilog-box.component';
 @Component({
@@ -34,13 +34,15 @@ export class FormsDataListComponent implements OnInit {
   }
  
   openDialog(): void {
-    const dialogRef = this.dialog.open(CreateNewFormDilogComponent, {
-      width: '300px',
-      data: {}
-    });
+    this.router.navigate(["/forms/form-builder"]);
 
-    dialogRef.afterClosed().subscribe(result => {
-    });
+    // const dialogRef = this.dialog.open(CreateNewFormDilogComponent, {
+    //   width: '300px',
+    //   data: {}
+    // });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    // });
   }
 
   async deleteDilogBox(id) {

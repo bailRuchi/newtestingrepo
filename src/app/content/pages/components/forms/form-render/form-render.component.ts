@@ -3,6 +3,8 @@ import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { GetDataToResolverService } from '../../../../../core/services/get-data-to-resolver.service';
 import { render } from '../../../../../../assets/renderJson'
+import * as _ from 'lodash';
+declare var $: any;
 @Component({
   selector: 'm-form-render',
   templateUrl: './form-render.component.html',
@@ -23,7 +25,6 @@ export class FormRenderComponent implements OnInit {
     // this.FormjsonData = localStorage.getItem('event')
     // this.form['components'] = JSON.parse(this.FormjsonData);
     // this.formDataService.getFormRenderData(this.form['components'])
-    // this.form['components']= render.components;
   }
 
   async ngOnInit() {
@@ -41,31 +42,22 @@ export class FormRenderComponent implements OnInit {
   }
 
   renderForm() {
-    // this.formDataId = formData['data']['Items'][0]['id'];
-    this.formSubmissionData = {}
-    this.formData = { 'components': render.components};
+    this.formSubmissionData =  localStorage.getItem('formData') ? {'data': JSON.parse(localStorage.getItem('formData'))} : {}
+    this.formData = { 'components': render.components };
   }
 
-  backClicked() {
-    this._location.back();
-  }
 
   onChange(e) {
-   console.log(e);
-   
+    if (e.data && !(_.isEqual(this.formSubmissionData, e))) {    
+      this.formSubmissionData = e;
+    } 
   }
 
-  onSubmit(event) {
-    this.JsonHold =event.data 
-    console.log(render.components ,"jsonData");
-    render.components.filter(e=>{
-      console.log(e.key == event.email2);
-      
-      // console.log(e.key != event.data);
-    });
-    console.log(event.data,"renderData");
-    
-  }
 
- 
+  onSubmit(submission) {
+    localStorage.setItem('formData', JSON.stringify(submission['data']));
+    // setTimeout(() => {
+    // $("button").find( ".fa-refresh" ).css( "display", "none" );
+    // },100)
+  }
 }
