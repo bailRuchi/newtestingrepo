@@ -2,7 +2,7 @@
 	<div class="d-flex align-items-center">
 		<div class="mr-auto">
 		</div>
-		<button class="mb-4" [routerLink]="['/forms/form-render',2]"  mat-raised-button color="primary">
+		<button class="mb-4" [routerLink]="['/forms/form-render',2]" mat-raised-button color="primary">
 			Add New Record
 			<i class="fa fa-plus" aria-hidden="true"></i>
 		</button>
@@ -16,12 +16,13 @@
 		</ng-template>
 		<ng-template matTabContent>
 			<mat-form-field class="example-form-field">
-				<input matInput type="text" #val matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'dataRecord.Search' | translate}}">
+				<mat-label>{{ 'dataRecord.Search' | translate }}</mat-label>
+				<input matInput type="text" #val matInput (keyup)="applyFilter($event.target.value)">
+				<mat-icon matSuffix>search</mat-icon>
 				<button mat-button *ngIf="val.value" matSuffix mat-icon-button aria-label="Clear" (click)="clear(val)">
 					<mat-icon>close</mat-icon>
 				</button>
 			</mat-form-field>
-
 			<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
 				<!-- Checkbox Column -->
@@ -37,7 +38,8 @@
 				<ng-container matColumnDef="csv">
 					<td mat-footer-cell *matFooterCellDef>
 						<button mat-icon-button (click)="exportCsv()">
-							<mat-icon aria-label="Example icon-button with a heart icon">save_alt</mat-icon>
+							<b><i class="fa fa-file-excel-o" aria-hidden="true"></i></b>
+							<!-- <mat-icon aria-label="Example icon-button with a heart icon">save_alt</mat-icon> -->
 							{{ 'formData.csv' | translate}}
 						</button>
 					</td>
@@ -45,7 +47,8 @@
 				<ng-container matColumnDef="pdf">
 					<td mat-footer-cell *matFooterCellDef>
 						<button mat-icon-button (click)="exportPdf()">
-							<mat-icon aria-label="Example icon-button with a heart icon">save_alt</mat-icon>
+							<b><i class="fa fa-file-pdf-o" aria-hidden="true"></i></b>
+							<!-- s<mat-icon aria-label="Example icon-button with a heart icon">save_alt</mat-icon> -->
 							{{ 'formData.pdf' | translate}}
 						</button>
 					</td>
@@ -121,5 +124,4 @@
 			</div>
 		</ng-template>
 	</mat-tab>
-
 </mat-tab-group>

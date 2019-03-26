@@ -29,7 +29,7 @@ export const locale = {
         },
         formData: {
             Apply: 'Apply',
-            csv: 'Csv',
+            csv: 'Excel',
             pdf: 'Pdf'
 		},
 		dataRecord: {

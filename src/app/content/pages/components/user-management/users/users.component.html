@@ -1,0 +1,9 @@
+<div class="user-management">
+	<button mat-raised-button color="primary" class=" mr-2" (click)="newUser()">New User</button>
+	<button mat-raised-button color="warn" class=" mr-2" (click)="newRole()">New Role</button>
+</div>
+<div>
+	<div *ngFor="let data of a.user">
+		<mat-card class="user-data"><span>{{data.name}}</span><span><b>{{data.permision}}</b></span></mat-card>
+	</div>
+</div>

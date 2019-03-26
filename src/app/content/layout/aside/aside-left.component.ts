@@ -68,6 +68,13 @@ export class AsideLeftComponent implements OnInit, AfterViewInit {
 			// },
 			// ]
 		},
+		{
+			title: 'User Managment',
+			desc: 'Some description goes here',
+			root: true,
+			icon: 'flaticon-line-graph',
+			page: '/user-management',
+		},
 	];
 	constructor(
 		private el: ElementRef,

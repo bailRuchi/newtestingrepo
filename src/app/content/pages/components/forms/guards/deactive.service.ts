@@ -1,31 +1,18 @@
 import { Injectable } from '@angular/core';
-import { FormCreateComponent } from '../form-builder/form-builder.component';
-import { Location } from '@angular/common';
-import { ActivatedRouteSnapshot, CanDeactivate, ActivatedRoute, Router, RouterStateSnapshot } from "@angular/router";
-import { Observable, of } from 'rxjs';
+import { CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+export interface CanComponentDeactivate {
+  canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
+}
 
-@Injectable({
-  providedIn: 'root'
-})
-export class CanActivateRouteGuard implements CanDeactivate<FormCreateComponent> {
-  constructor(
-    private location: Location,
-    public router: Router,
-    public route: ActivatedRoute
-  ) { }
-  
-  canDeactivate(component: FormCreateComponent, currentRoute: ActivatedRouteSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    let can = component.canDeactivate();
-    if (!can) {
-      const currentUrlTree = this.router.createUrlTree([], currentRoute);
-      const currentUrl = currentUrlTree.toString();
-      let isAgree = confirm('Are you sure?');
+@Injectable()
+export class CanActivateRouteGuard implements CanDeactivate<CanComponentDeactivate> {
+  canDeactivate(component: CanComponentDeactivate,
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot) {
 
-      return Observable.of(isAgree);
-
-    } else {
-      return true;
-    }
+    let url: string = state.url;
+    return component.canDeactivate ? component.canDeactivate() : true;
   }
 
 }

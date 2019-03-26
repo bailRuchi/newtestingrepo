@@ -2,9 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes, } from '@angular/router';
 import { PagesComponent } from './pages.component';
 import { CanActiveGuard } from './auth/authgaurd';
-// import { NgxPermissionsGuard } from 'ngx-permissions';
 import { ErrorPageComponent } from './snippets/error-page/error-page.component';
-// import { AuthGuardService } from '../guards/auth-guard.service';
 
 const routes: Routes = [
 	{
@@ -14,20 +12,21 @@ const routes: Routes = [
 		children: [
 			{
 				path: '',
-				// loadChildren: './components/dashboard/dashboard.module#DashboardModule'
 				redirectTo: 'forms',
 				pathMatch: 'full'
 			}, {
 				path: 'forms',
 				loadChildren: './components/forms/forms.module#FormDataModule',
-				// canDeactivate: [AuthGuardService]
+			},
+			{
+				path: 'user-management',
+				loadChildren: './components/user-management/user-management.module#UserManagementModule',
 			},
 
 		]
 	},
 	{
 		path: 'login',
-		// canActivate: [CanActiveGuard],
 		loadChildren: './auth/auth.module#AuthModule',
 	},
 	{

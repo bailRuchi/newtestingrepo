@@ -72,7 +72,7 @@ export class PagesComponent implements OnInit, AfterViewInit {
 			if (event instanceof NavigationStart) {
 				if (this.contenWrapper) {
 					// hide content
-					this.contenWrapper.nativeElement.style.display = 'none';
+					// this.contenWrapper.nativeElement.style.display = 'none';
 				}
 			}
 			if (event instanceof NavigationEnd) {

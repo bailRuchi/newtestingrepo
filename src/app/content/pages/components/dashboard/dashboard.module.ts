@@ -17,31 +17,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 			{
 				path: '',
 				component: DashboardComponent,
-				// children: [
-				// 	{
-				// 		path: '',
-				// 		component: FormComponent,
-				// 		resolve: { message: ResolverService }
-				// 	},
-				// 	{
-				// 		path: 'form-render',
-				// 		component: FormRenderComponent,
-				// 		resolve: { message: ResolverService }
-				// 	},
-				// ]
 			},
 
 		])
 	],
-	// exports: [
-	// 	LayoutModule,
-	
-	// ],
-	// providers: [
-	// 	ResolverService,
-	// 	GetDataToResolverService,
-	// 	ApiService,	
-	// ],
 	declarations: [
 		DashboardComponent,
 	]

@@ -30,7 +30,6 @@ export class FormDataComponent implements OnInit {
   createTable() {
     let data: any = {
       "data": [{ "textField2": "weew", "textArea2": "4234234234", "checkbox2": true, "radio2": "", "number2": 323423, "submit": true, "textField21": "weew", "textArea21": "4234234234", "checkbox21": true, "radio21": "", "number21": 323423, "submit1": true },
-      { "textField2": "abc", "textArea2": "98876576", "checkbox2": true, "radio3": "", "number": 32342309, "submit": true, "textField21": "iyuiui", "textArea21": "4234234234", "checkbox21": true, "radio21": "", "number21": 323423, "submit1": true }
       ]
     }
     let first_data = data['data'][0];

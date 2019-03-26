@@ -8,7 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FormsDataListComponent } from './form-data-list/form-data-list.component';
 import { FormDataComponent } from './form-data-list/form-data/form-data.component';
 import { FormioModule } from 'angular-formio';
-import { MatSidenavModule } from '@angular/material';
+import { MatSidenavModule, MatProgressBarModule } from '@angular/material';
 import { WidgetChartsModule } from '../../../partials/content/widgets/charts/widget-charts.module';
 import { PartialsModule } from '../../../partials/partials.module';
 import { LayoutModule } from '../../../layout/layout.module';
@@ -19,14 +19,12 @@ import { FormRenderComponent } from './form-render/form-render.component';
 import { FormCreateComponent } from './form-builder/form-builder.component';
 import { CreateNewFormDilogComponent } from './create-new-form-dilog/create-new-form-dilog.component';
 import { ConfirmDeleteDilogBoxComponent } from './confirm-delete-dilog-box/confirm-delete-dilog-box.component'
-<<<<<<< .mine
-||||||| .r81
-
-=======
 import { AuthGuardService } from './guards/auth-guard.service';
 import { CanActivateRouteGuard } from './guards/deactive.service';
-
->>>>>>> .r87
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { InterseptorService } from '../../../../core/auth/interseptor.service';
+import { ErrorInterseptorService } from '../../../../core/auth/error-interseptor.service';
+import { DialogService } from './dialog.service'
 @NgModule({
   imports: [
     CommonModule,
@@ -39,11 +37,11 @@ import { CanActivateRouteGuard } from './guards/deactive.service';
     FormioModule,
     MaterialModule,
     TranslateModule,
+    MatProgressBarModule,
     RouterModule.forChild([
       {
         path: '',
         component: FormsDataComponent,
-        // canDeactivate: [DeactivateGuardService],
         children: [{
           path: '',
           redirectTo: 'form-data-list',
@@ -60,24 +58,19 @@ import { CanActivateRouteGuard } from './guards/deactive.service';
           path: 'form-builder',
           component: FormCreateComponent,
           canDeactivate: [CanActivateRouteGuard],
-          canActivate: [AuthGuardService],
+          // canActivate: [AuthGuardService],
           resolve: { message: ResolverService }
 
         }, {
           path: 'form-builder/:id',
           component: FormCreateComponent,
-          // canDeactivate: [DeactivateGuardService],
           resolve: { message: ResolverService }
         },
         {
           path: 'form-data/:id',
-          // canDeactivate: [DeactivateGuardService],
           component: FormDataComponent,
         }]
       },
-
-
-
     ])
   ],
   exports: [
@@ -91,16 +84,29 @@ import { CanActivateRouteGuard } from './guards/deactive.service';
   providers: [
     ResolverService,
     GetDataToResolverService,
+    DialogService,
     ApiService,
-    AuthGuardService
+    AuthGuardService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterseptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterseptorService,
+      multi: true
+    },
+    AuthGuardService,
+    CanActivateRouteGuard
   ],
   declarations: [
-    FormsDataComponent, 
-    FormsDataListComponent, 
-    FormDataComponent, 
-    FormCreateComponent, 
-    FormRenderComponent, 
-    CreateNewFormDilogComponent, 
+    FormsDataComponent,
+    FormsDataListComponent,
+    FormDataComponent,
+    FormCreateComponent,
+    FormRenderComponent,
+    CreateNewFormDilogComponent,
     ConfirmDeleteDilogBoxComponent
   ]
 })

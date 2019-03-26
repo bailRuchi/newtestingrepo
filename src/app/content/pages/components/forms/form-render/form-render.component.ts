@@ -56,8 +56,9 @@ export class FormRenderComponent implements OnInit {
 
   onSubmit(submission) {
     localStorage.setItem('formData', JSON.stringify(submission['data']));
-    // setTimeout(() => {
-    // $("button").find( ".fa-refresh" ).css( "display", "none" );
-    // },100)
+    setTimeout(() => {
+    $("button").find( ".fa-refresh" ).css( "display", "none" );
+    },100)
   }
+
 }

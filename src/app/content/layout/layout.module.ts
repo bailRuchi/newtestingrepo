@@ -21,8 +21,6 @@ import { TopbarComponent } from './header/topbar/topbar.component';
 import { LanguageSelectorComponent } from './header/topbar/language-selector/language-selector.component';
 import { ErrorInterseptorService } from '../../core/auth/error-interseptor.service';
 import { MatSnackBarModule } from '@angular/material';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { InterseptorService } from '../../core/auth/interseptor.service';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
 };
@@ -55,18 +53,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 			provide: PERFECT_SCROLLBAR_CONFIG,
 			useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
 		},
-		{
-			provide: HTTP_INTERCEPTORS,
-			useClass: InterseptorService,
-			multi: true
-		},
-		{
-			provide: HTTP_INTERCEPTORS,
-			useClass: ErrorInterseptorService,
-			multi: true
-
-
-		}
+		
 	],
 	imports: [
 		CommonModule,

@@ -14,7 +14,9 @@ import { Field_Hi, Form_Hi, Button_Hi } from '../../../../../config/i18n/compone
 import { Field_En, Form_En, Button_En } from '../../../../../config/i18n/component_en';
 import { Formio } from 'formiojs';
 import { Location } from '@angular/common';
-import { variable } from '@angular/compiler/src/output/output_ast';
+import { Observable } from 'rxjs/Observable';
+import { DialogService } from './../dialog.service';
+
 @Component({
 	selector: 'm-form',
 	templateUrl: './form-builder.component.html',
@@ -32,7 +34,7 @@ export class FormCreateComponent implements OnInit, AfterViewInit {
 	public config: any;
 	formTemplate = {};
 	buttonTitle = "Save Form";
-	imageBase64:string;
+	imageBase64: string;
 	checked = false;
 	constructor(
 		private router: Router,
@@ -43,10 +45,15 @@ export class FormCreateComponent implements OnInit, AfterViewInit {
 		private formDataService: GetDataToResolverService,
 		private translationService: TranslationService,
 		private apiService: ApiService,
-		private location: Location
+		private location: Location,
+		public dialogService: DialogService
 	) {
 		if (this.route.snapshot.params.id) {
 			this.buttonTitle = "Update Form";
+		}
+		if (localStorage.length) {
+			this.FormjsonData = localStorage.getItem('event')
+			this.form['components'] = JSON.parse(this.FormjsonData);
 		}
 	}
 	async ngOnInit() {
@@ -130,8 +137,12 @@ export class FormCreateComponent implements OnInit, AfterViewInit {
 
 		}
 	}
-	canDeactivate() {
-		return this.checked;
+
+	canDeactivate(): Observable<boolean> | boolean {
+		if (!this.checked) {
+			return this.dialogService.confirm('Discard unsaved Country?');
+		}
+		return true;
 	}
 	saveForm() {
 		this.checked = true;
@@ -178,7 +189,6 @@ export class FormCreateComponent implements OnInit, AfterViewInit {
 				formioBuilder.unwrap();
 			}
 			formioBuilder.wrap('<div class="form-io-mobile col-xs-8 col-sm-9 col-md-10"></div>');
-			// formioBuilder.wrap('<div class=""><img  src="../../../../../../assets/img/Mann-India-logo-new.png"></div>');
 		} else if (this.selectedView == "i-pad") {
 			if ($(".form-io-altered").find(".form-io-mobile").length) {
 				formioBuilder.unwrap();

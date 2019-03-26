@@ -1,35 +1,48 @@
 table {
-    width: 100%;
-  }
-  
-  .selectBox{
-    width: 100%;
-    border: none;
-    overflow: auto;
-    min-height: 280px;
-  }
-  .selectOption{
-    text-transform: capitalize;
-    text-align: center;
-    padding: 5px;
-    font-size: 1.2em;
-  }
-  select:-internal-list-box {
-    background-color: gray;
-  }
-
-  .exportIcon{
-    position: absolute;
-    top: 35%;
-    right: 25%;
-    z-index: 999;
-  }
-
-  @media only screen and (max-width: 600px) {
-    .exportIcon{
-      position: unset; 
-  }
+	width: 100%;
 }
+
+.selectBox {
+	width: 100%;
+	border: none;
+	overflow: auto;
+	min-height: 280px;
+}
+
+.selectOption {
+	text-transform: capitalize;
+	text-align: center;
+	padding: 5px;
+	font-size: 1.2em;
+}
+
+select:-internal-list-box {
+	background-color: gray;
+}
+
+.exportIcon {
+	position: absolute;
+	top: 35%;
+	right: 25%;
+	z-index: 999;
+}
+
+@media only screen and (max-width: 600px) {
+	.exportIcon {
+		position: unset;
+	}
+}
+
 .table-header {
-  background: #e4e2e2 !important;
+	background: #e4e2e2 !important;
+}
+input.empty {
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+}
+
+.example-form-field {
+  width:100%;
 }

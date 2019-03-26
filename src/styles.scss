@@ -21,11 +21,6 @@
 		left: -50px !important;
 	}
 }
-
-.none {
-	// display: none;
-}
-
 .mat-button.mat-accent,
 .mat-icon-button.mat-accent,
 .mat-stroked-button.mat-accent {
@@ -50,10 +45,12 @@
 }
 
 /* Material Error Message Styling End */
-
-// to change loder-color [
 .green-progress .mat-progress-bar-fill::after {
 	background: #46d964 !important;
+}
+.mat-progress-bar {
+	margin-top: -25px;
+    margin-left: -25px;
 }
 
 .green-progress .mat-progress-bar-buffer {
@@ -63,15 +60,6 @@
 .tr.mat-header-row {
 	background: #e4e2e2 !important;
 }
-<<<<<<< .mine
-||||||| .r81
-
-.abc {
-	background: red;
-}
-// .active-link {
-// 	background: red !important;
-// }=======
 
 .red {
 	background: red;
@@ -79,6 +67,3 @@
 .bold {
 	font-weight: 800;
 }
-// .active-link {
-// 	background: red !important;
-// }>>>>>>> .r87

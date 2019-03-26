@@ -1,0 +1,26 @@
+<div class="add-new-user">
+	<h3><strong>Add New Role</strong></h3>
+	<mat-form-field class="example-full-width">
+		<input matInput placeholder="Label">
+	</mat-form-field>
+	<mat-tree [dataSource]="dataSource" [treeControl]="treeControl" >
+		<mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+			<button mat-icon-button disabled (click)="saveNode(node, itemValue.value)"></button>
+			<mat-checkbox class="checklist-leaf-node " [checked]="checklistSelection.isSelected(node)" (change)="todoLeafItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+		</mat-tree-node>
+
+		<mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding >
+			<button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.filename">
+				<mat-icon class="mat-icon-rtl-mirror">
+					{{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+				</mat-icon>
+			</button>
+			<mat-checkbox [checked]="descendantsAllSelected(node)" [indeterminate]="descendantsPartiallySelected(node)" (change)="todoItemSelectionToggle(node)">{{node.item}}</mat-checkbox>
+		</mat-tree-node>
+	</mat-tree>
+	<div class="mat-tree-save">
+		<button mat-raised-button color="primary" class=" mr-2" (click)="cancel()">Cancel</button>
+		<button mat-raised-button color="primary" class=" mr-2" (click)="saveNode()">Save</button>
+	</div>
+
+</div>

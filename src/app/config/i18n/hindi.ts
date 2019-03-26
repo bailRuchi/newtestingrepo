@@ -30,7 +30,7 @@ export const locale = {
         },
         formData: {
             Apply: 'लागू करें',
-            csv: 'सीएसवी',
+            csv: 'एक्सेल',
             pdf: 'पीडीएफ'
         },
         dataRecord: {
