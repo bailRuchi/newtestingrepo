@@ -1,0 +1,95 @@
+.card {
+	margin-bottom: 10px;
+	height: 12rem;
+	border-radius: 5px;
+	padding-left: 18px;
+	padding-top: 18px;
+
+	.data-render {
+		float: right
+	}
+
+	.cardContent {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.font-color {
+		color: #5d5d5d;
+	}
+}
+
+.can-show {
+	text-align: center;
+}
+
+.data-logo {
+	display: flex;
+	height: 70%;
+}
+.data-description{
+    margin-left: 20px;
+    text-transform: capitalize;
+}
+.hashTag{
+    border-radius: 10px;
+    font-size: 12px;
+    height: 22px;
+    line-height: 1;
+	margin-top: 6px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.mat-card{
+    padding-bottom: 0;
+}
+
+.mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button {
+    font-size: 12px;
+    line-height: 34px;
+    padding: 0 0px;
+    min-width: 65px;
+    border-radius: 5px;
+    overflow: visible;
+}
+.mn-bottom-actions {
+	position: absolute;
+	bottom: 10px;
+	left: 16px;
+	right: 10px;
+}
+.mn-bottom-actions > div {
+	display: inline-block;
+}
+.mn-bottom-actions > div:last-child {
+	float: right;
+}
+.mn-bottom-actions > div:last-child > button:first-child {
+	min-width: 60px;
+}
+.mn-new-form-container {
+	padding: 0px;
+}
+.mn-new-form-content {
+	height: 100%;
+	width: 100%;
+	padding: 0px;
+}
+.mn-new-form-content > button {
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+.mn-form-logo {
+	height: 52px;
+	background: #273a7a;
+	border-radius: 5px;
+	box-shadow: 2px 2px 3px #000000;
+	border-radius: 5px;
+}
+.mn-grid-container {
+	padding-right: 0px;
+}
+.mn-grid-parent {
+	margin-right: 0px;
+}

@@ -13,6 +13,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 @Component({
 	selector: 'm-aside-left',
 	templateUrl: './aside-left.component.html',
+	styleUrls: ['./aside-left.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AsideLeftComponent implements OnInit, AfterViewInit {

@@ -27,21 +27,24 @@ export class CreateNewFormDilogComponent implements OnInit {
     try {
       this.confirmCreateForm = this.formBuilder.group({
         name: [null, Validators.compose([Validators.required])],
-        description: [null, Validators.compose([Validators.required])],
+        desc: [null, Validators.compose([Validators.required])],
+        logo: [null],
+        version: ['1.0'],
+        ownerId: ['1']
       });
     }
     catch (err) {
       console.log(err);
     }
   }
-  
+
   public async onSubmit(formData) {
     try {
-      // this.router.navigate(["/forms/form-builder"]);
+      localStorage.setItem('currentUser', JSON.stringify(formData));
       this.dialogRef.close('true');
     } catch (error) {
       console.log(error);
     }
-    // this.dialogRef.close();
+
   }
 }

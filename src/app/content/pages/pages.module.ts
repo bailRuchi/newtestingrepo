@@ -10,8 +10,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorPageComponent } from './snippets/error-page/error-page.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
 import { MatSnackBarModule, MatProgressBarModule } from '@angular/material';
+import { InterseptorService } from '../../core/auth/interseptor.service';
+import { ErrorInterseptorService } from '../../core/auth/error-interseptor.service';
+import { LoadingService } from '../../core/auth/loading.service';
 @NgModule({
 	declarations: [
 		PagesComponent,
@@ -29,9 +31,21 @@ import { MatSnackBarModule, MatProgressBarModule } from '@angular/material';
 		MatSnackBarModule,
 		MatProgressBarModule
 	],
-	exports: [LayoutModule],
+	exports: [CoreModule,LayoutModule],
 
 	providers: [
+		LoadingService,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: InterseptorService,
+			multi: true
+		}
+		,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: ErrorInterseptorService,
+			multi: true
+		},
 		
 	]
 })

@@ -8,52 +8,52 @@
 			</div>
 			<form class="m-form m-form--fit m-form--label-align-right" id="addUserForm" autoComplete="off" [formGroup]="addNewRoleForm" (ngSubmit)="onsubmit(addNewRoleForm.value)">
 				<div class="m-portlet__body">
-					<div class="row">
-						<div class="form-group m-form__group col-6 text-type">
-							<label for="exampleInputEmail1"> FristName</label>
-							<input type="text" class="form-control m-input m-input--square" id="add-user-email" placeholder="Name" [formControl]="addNewRoleForm.controls['fristName']">
-							<!-- <span class="m-form__help">We'll never share your email with anyone else.</span> -->
-							<mat-error *ngIf="!addNewRoleForm.controls['email'].valid && addNewRoleForm.controls['email'].touched">
+						<mat-form-field appearance="outline" class="col-md-6">
+							<mat-label>FristName</mat-label>
+							<input type="text" matInput placeholder="Name" [formControl]="addNewRoleForm.controls['fristName']">
+							<mat-error *ngIf="!addNewRoleForm.controls['fristName'].valid && addNewRoleForm.controls['fristName'].touched">
 								Please enter a FirstName
 							</mat-error>
-						</div>
-						<div class="form-group m-form__group col-6">
-							<label for="exampleInputEmail1">LastName</label>
-							<input type="text" class="form-control m-input m-input--square" id="add-user-email" placeholder="Name" [formControl]="addNewRoleForm.controls['lastName']">
-							<!-- <span class="m-form__help">We'll never share your email with anyone else.</span> -->
+						</mat-form-field>
+						<mat-form-field appearance="outline" class="col-md-6">
+							<mat-label>LastName</mat-label>
+							<input type="text" matInput placeholder="Name" [formControl]="addNewRoleForm.controls['lastName']">
 							<mat-error *ngIf="!addNewRoleForm.controls['lastName'].valid && addNewRoleForm.controls['lastName'].touched">
 								Please enter a LastName
 							</mat-error>
-						</div>
-					</div>
-					<div class="row">
-						<div class="form-group m-form__group col-6 text-type">
-							<label for="exampleSelect1">Gender</label>
-							<select class="form-control m-input m-input--square" [formControl]="addNewRoleForm.controls['user_gender']">
-								<option>Male</option>
-								<option>Female</option>
-							</select>
-						</div>
-						<div class="form-group m-form__group col-6">
-							<label for="exampleSelect1">Dob</label>
-							<input type="date" class="form-control m-input m-input--square" id="add-user-email" placeholder="date" [formControl]="addNewRoleForm.controls['dob']" [max]="maxDate" (change)="dateChange($event.target.value)" id="birthdate">
+						</mat-form-field>
+						<mat-form-field class="col-md-6">
+							<mat-label>Gender</mat-label>
+							<mat-select disableRipple [formControl]="addNewRoleForm.controls['user_gender']"> 
+								<mat-option value="1">Male</mat-option>
+								<mat-option value="2">Female</mat-option>
+							</mat-select>
+							<mat-error *ngIf="!addNewRoleForm.controls['user_gender'].valid && addNewRoleForm.controls['user_gender'].touched">
+									Please Select Gender
+								</mat-error>
+						</mat-form-field>
 
-						</div>
-					</div>
-					<div class="form-group m-form__group row">
-						<label for="exampleInputPassword1">Email</label>
-						<input class="form-control m-input m-input--square" id="add-user-password" placeholder="email" type="email" [formControl]="addNewRoleForm.controls['email']">
+						<mat-form-field appearance="outline" class="col-md-6">
+							<mat-label>Dob</mat-label>
+							<input matInput type="date" [formControl]="addNewRoleForm.controls['dob']" [max]="maxDate" (change)="dateChange($event.target.value)" id="birthdate">
+							<mat-error *ngIf="!addNewRoleForm.controls['dob'].valid && addNewRoleForm.controls['dob'].touched">
+								Please enter Dob
+							</mat-error>
+						</mat-form-field>
+					<mat-form-field appearance="outline" class="col-md-12">
+						<mat-label>Email</mat-label>
+						<input matInput placeholder="email" type="email" [formControl]="addNewRoleForm.controls['email']">
 						<mat-error *ngIf="!addNewRoleForm.controls['email'].valid && addNewRoleForm.controls['email'].touched">
 							Please enter Email
 						</mat-error>
-					</div>
-					<div class="form-group m-form__group row">
-						<label for="exampleInputPassword1">Mobile Numebr</label>
-						<input class="form-control m-input m-input--square" id="add-user-password" placeholder="mobile" type="email" [formControl]="addNewRoleForm.controls['mobile']">
+					</mat-form-field>
+					<mat-form-field appearance="outline" class="col-md-12">
+						<mat-label>Mobile Numebr</mat-label>
+						<input matInput placeholder="mobile" type="email" [formControl]="addNewRoleForm.controls['mobile']">
 						<mat-error *ngIf="!addNewRoleForm.controls['mobile'].valid && addNewRoleForm.controls['mobile'].touched">
 							Please enter Mobile Number
 						</mat-error>
-					</div>
+					</mat-form-field>
 
 				</div>
 				<div class="m-portlet__foot m-portlet__foot--fit">

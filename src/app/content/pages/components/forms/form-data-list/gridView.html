@@ -1,0 +1,33 @@
+<div class="row mn-grid-parent">
+	<div class="col-12 col-sm-6 col-lg-4 col-xl-3 mn-grid-container">
+		<mat-card class="card mn-card mn-new-form-container">
+			<mat-card-content  class="cardContent mn-new-form-content">
+				<button mat-button color="warn" (click)="openDialog()"><i style="font-size:50px;" class="fa fa-plus-square pt-1"></i><div>NEW FORM</div></button>
+			</mat-card-content>
+		</mat-card>
+	</div>
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 mn-grid-container" *ngFor="let data of serviceList">
+        <mat-card class="card mn-card">
+            <mat-card-content  class="cardContent">
+                <div class="data-logo" >
+                    <div><img image [src]="(data.logo)" class="mn-form-logo"></div>
+                    <div class="data-description">
+                        <b> {{data.resourceGroupName}}</b>
+                        <div class="font-color">{{data.name}}</div>
+                        <div class="font-color">{{data.desc}}</div>
+                    </div>
+                </div>
+            </mat-card-content>
+
+            <div class="mn-bottom-actions">
+				<div>
+					<button mat-raised-button class="hashTag" color="primary" (click)="selectUserData(data.id)"># Submissions: 23</button>
+				</div>
+				<div>
+					<button mat-button color="primary" (click)="OnClickEdit(data.id)">EDIT</button>
+					<button mat-button color="warn" (click)="deleteDilogBox(data.id)">DELETE</button>
+				</div>
+			</div>
+        </mat-card>
+    </div>
+</div>

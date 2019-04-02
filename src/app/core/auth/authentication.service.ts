@@ -3,16 +3,17 @@ import { map, catchError, tap, switchMap } from 'rxjs/operators';
 
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { AuthService } from 'ngx-auth';
 
 import { TokenStorage } from './token-storage.service';
 import { UtilsService } from '../services/utils.service';
 import { AccessData } from './access-data';
 import { Credential } from './credential';
-
+import {
+	AuthService
+} from "angular-6-social-login";
 @Injectable()
-export class AuthenticationService implements AuthService {
-	API_URL = 'http://5.9.144.226:3000';
+export class AuthenticationService  {
+	API_URL = 'http://192.168.1.147:8080/';
 	API_ENDPOINT_LOGIN = '/user/login';
 	API_ENDPOINT_REFRESH = '/refresh';
 	API_ENDPOINT_REGISTER = '/register';
@@ -22,7 +23,8 @@ export class AuthenticationService implements AuthService {
 	constructor(
 		private http: HttpClient,
 		private tokenStorage: TokenStorage,
-		private util: UtilsService
+		private util: UtilsService,
+		private socialAuthService: AuthService
 	) {
 		this.onCredentialUpdated$ = new Subject();
 	}
@@ -136,9 +138,12 @@ export class AuthenticationService implements AuthService {
 	 */
 	public logout(refresh?: boolean): void {
 		this.tokenStorage.clear();
-		if (refresh) {
+		console.log("logout");
+		this.socialAuthService.signOut();
+		if (refresh) { 
 			location.reload(true);
 		}
+		// this.socialAuthService.signOut();
 	}
 
 	/**

@@ -21,7 +21,7 @@ export class AuthGuardService {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     const dialogRef = this.dialog.open(CreateNewFormDilogComponent, {
-      width: '300px',
+      width: '446px',
       data: {}
     });
     dialogRef.afterClosed().subscribe(result => {

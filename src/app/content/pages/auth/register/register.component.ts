@@ -94,6 +94,14 @@ export class RegisterComponent implements OnInit {
 
 		}
 	}
+
+
+	signUp(type){
+		
+	}
+
+
+
 	// submit() {
 	// 	this.spinner.active = true;
 	// 	if (this.validate(this.f)) {

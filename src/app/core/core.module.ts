@@ -5,6 +5,7 @@ import { MenuAsideOffcanvasDirective } from './directives/menu-aside-offcanvas.d
 import { MenuHorizontalOffcanvasDirective } from './directives/menu-horizontal-offcanvas.directive';
 import { MenuHorizontalDirective } from './directives/menu-horizontal.directive';
 import { ClipboardDirective } from './directives/clipboard.directive';
+import { ImageCheckDirective } from './directives/image-check';
 import { ScrollTopDirective } from './directives/scroll-top.directive';
 import { HeaderDirective } from './directives/header.directive';
 import { MenuAsideToggleDirective } from './directives/menu-aside-toggle.directive';
@@ -33,6 +34,7 @@ import { ResolverService } from './services/resolver.service';
 		QuickSidebarOffcanvasDirective,
 		QuickSearchDirective,
 		ClipboardDirective,
+		ImageCheckDirective,
 		PortletDirective,
 		// pipes
 		FirstLetterPipe,
@@ -54,6 +56,7 @@ import { ResolverService } from './services/resolver.service';
 		QuickSidebarOffcanvasDirective,
 		QuickSearchDirective,
 		ClipboardDirective,
+		ImageCheckDirective,
 		PortletDirective,
 		// pipes
 		FirstLetterPipe,

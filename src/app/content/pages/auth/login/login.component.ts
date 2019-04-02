@@ -9,11 +9,9 @@ import {
 	ChangeDetectorRef,
 	HostBinding
 } from '@angular/core';
-import { AuthenticationService } from '../../../../core/auth/authentication.service';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AuthNoticeService } from '../../../../core/auth/auth-notice.service';
-import * as objectPath from 'object-path';
 import { TranslateService } from '@ngx-translate/core';
 import { SpinnerButtonOptions } from '../../../partials/content/general/spinner-button/button-options.interface';
 import { NgForm, FormControl, Validators, FormGroup } from '@angular/forms';
@@ -22,6 +20,8 @@ import {
 	FacebookLoginProvider,
 	GoogleLoginProvider
 } from "angular-6-social-login";
+import { ApiService } from '../../../../core/services/api.service';
+import { environment } from '../../../../../environments/environment';
 @Component({
 	selector: 'm-login',
 	templateUrl: './login.component.html',
@@ -49,12 +49,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 	};
 
 	constructor(
-		private authService: AuthenticationService,
 		private router: Router,
 		public authNoticeService: AuthNoticeService,
 		private translate: TranslateService,
 		private cdr: ChangeDetectorRef,
-		private socialAuthService: AuthService
+		private socialAuthService: AuthService,
+		private apiService: ApiService
 	) {
 		this.userLoginForm();
 	}
@@ -79,11 +79,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 			socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
 		}
 		this.socialAuthService.signIn(socialPlatformProvider).then(userData => {
-			console.log("Facebook sign in data : ", userData);
-			localStorage.setItem('userInfo', JSON.stringify(userData));
-			this.router.navigate(['/'])
-			// Now sign-in with userData
-			// ...
+			// this.apiService.postTypeRequest(`${environment.userManagement}login`, userData).then((res: any) => {
+			// 	if (res) {
+			// 		localStorage.setItem('userInfo', JSON.stringify(res));
+					this.router.navigate(['/']);
+			// 	}
+			// })
+
 		});
 	}
 	private userLoginForm(): void {

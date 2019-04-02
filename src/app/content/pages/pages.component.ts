@@ -8,7 +8,8 @@ import {
 	ViewChild,
 	ElementRef,
 	AfterViewInit,
-	ChangeDetectionStrategy
+	ChangeDetectionStrategy,
+	ChangeDetectorRef
 } from '@angular/core';
 import * as objectPath from 'object-path';
 import { LayoutConfigService } from '../../core/services/layout-config.service';
@@ -22,9 +23,11 @@ import { LoadingService } from '../../core/auth/loading.service';
 @Component({
 	selector: 'm-pages',
 	templateUrl: './pages.component.html',
+	styleUrls: ['./pages.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PagesComponent implements OnInit, AfterViewInit {
+	loader: any;
 	@HostBinding('class') classes = 'm-grid m-grid--hor m-grid--root m-page';
 	@Input() selfLayout: any = 'blank';
 	@Input() asideLeftDisplay: any;
@@ -45,7 +48,8 @@ export class PagesComponent implements OnInit, AfterViewInit {
 		private layoutRefService: LayoutRefService,
 		private animationBuilder: AnimationBuilder,
 		private translationService: TranslationService,
-		private _loadingService: LoadingService
+		private LoadingService: LoadingService,
+		private _change: ChangeDetectorRef
 
 	) {
 		this.configService.onLayoutConfigUpdated$.subscribe(model => {
@@ -86,9 +90,13 @@ export class PagesComponent implements OnInit, AfterViewInit {
 		});
 	}
 
-	ngOnInit(): void { }
+	ngOnInit(): void {
+		this.loader = this.LoadingService.loader;
+		this._change.detectChanges();
+	}
 
 	ngAfterViewInit(): void {
+
 		setTimeout(() => {
 			if (this.mContent) {
 				// keep content element in the service
@@ -96,7 +104,6 @@ export class PagesComponent implements OnInit, AfterViewInit {
 			}
 		});
 	}
-
 	/**
 	 * Animate page load
 	 */

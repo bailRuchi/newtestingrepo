@@ -1,43 +1,35 @@
-// m-form {
-
-
 	.m-subheader {
 		padding: unset !important;
 	}
-// }
 
-.formio-dialog.formio-dialog-theme-default {
-	padding-bottom: unset !important;
-	padding-top: unset !important;
-}
+	.formio-dialog.formio-dialog-theme-default {
+		padding-bottom: unset !important;
+		padding-top: unset !important;
+	}
 
-.formio-dialog-content {
-	max-height: 80vh;
-	top: 15%;
-}
+	.formio-dialog-content {
+		max-height: 80vh;
+		top: 15%;
+	}
 
-.formcomponents {
-	flex: 0 0 25% !important;
-	max-width: 25% !important;
-}
+	.formcomponents {
+		flex: 0 0 25% !important;
+		max-width: 25% !important;
+	}
 
-.tab-content {
-	overflow-y: auto;
-	max-height: 58vh;
-}
+	.tab-content {
+		overflow-y: auto;
+		max-height: 58vh;
+	}
 
-.pull-right {
-	display: none;
-}
+	.pull-right {
+		display: none;
+	}
 
-.formarea {
-	max-width: 70.33333%;
-}
+	.formarea {
+		max-width: 70.33333%;
+	}
 
-.btn-block {
-	// background: linear-gradient(135deg, #c4c5d6 30%, #828686 100%);
-}
-
-.formcomponentsDisplay{
-    display: none !important;
-}
+	.formcomponentsDisplay {
+		display: none !important;
+	}

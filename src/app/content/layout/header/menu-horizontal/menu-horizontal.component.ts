@@ -7,7 +7,8 @@ import { MenuHorizontalDirective } from '../../../../core/directives/menu-horizo
 import { MenuHorizontalService } from '../../../../core/services/layout/menu-horizontal.service';
 import { MenuConfigService } from '../../../../core/services/menu-config.service';
 import { ClassInitService } from '../../../../core/services/class-init.service';
-
+import { ApiService } from '../../../../core/services/api.service';
+import { AuthenticationService } from '../../../../core/auth/authentication.service';
 @Component({
 	selector: 'm-menu-horizontal',
 	templateUrl: './menu-horizontal.component.html',
@@ -22,7 +23,7 @@ export class MenuHorizontalComponent implements OnInit, AfterViewInit {
 	mMenuHorOffcanvas: MenuHorizontalOffcanvasDirective;
 	@HostBinding('attr.mMenuHorizontal')
 	mMenuHorizontal: MenuHorizontalDirective;
-
+	userInfo: any;
 	currentRouteUrl: any = '';
 	activeItem: any;
 	itemsWithAsides = [];
@@ -32,6 +33,8 @@ export class MenuHorizontalComponent implements OnInit, AfterViewInit {
 		public classInitService: ClassInitService,
 		public menuHorService: MenuHorizontalService,
 		private menuConfigService: MenuConfigService,
+		private apiService: ApiService,
+		private authService: AuthenticationService,
 		private router: Router,
 	) {
 		this.classes = this.menuHorService.menuClasses;
@@ -48,9 +51,11 @@ export class MenuHorizontalComponent implements OnInit, AfterViewInit {
 	}
 
 	ngOnInit(): void {
+		this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
 		this.currentRouteUrl = this.router.url;
 		this.menuHorService.menuList$.subscribe(menuItems => {
-			this.fillAsides(menuItems)});
+			this.fillAsides(menuItems)
+		});
 
 		this.shouldOverrideAsides();
 
@@ -216,6 +221,7 @@ export class MenuHorizontalComponent implements OnInit, AfterViewInit {
 		return false;
 	}
 	logout() {
-		localStorage.clear();
+		this.authService.logout(true);
 	}
+
 }

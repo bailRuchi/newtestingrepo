@@ -1,23 +1,24 @@
-<h1 mat-dialog-title>Create New Form</h1>
+<h1 mat-dialog-title class="title">Create New Form</h1>
 <div mat-dialog-content>
-  <form *ngIf="confirmCreateForm" [formGroup]="confirmCreateForm" (ngSubmit)="onSubmit(confirmCreateForm.value)">
-	<mat-form-field appearance="outline">
-		<mat-label>Name</mat-label>
-    <input matInput placeholder="Name" formControlName="name">
-    <mat-error *ngIf="!confirmCreateForm.controls.name.valid && confirmCreateForm.controls.name.dirty && confirmCreateForm.value.name.length==0">
+	<form *ngIf="confirmCreateForm" [formGroup]="confirmCreateForm" (ngSubmit)="onSubmit(confirmCreateForm.value)">
+		<mat-form-field appearance="outline" class="col-md-12">
+			<mat-label>Name</mat-label>
+			<input matInput placeholder="Name" formControlName="name">
+			<mat-error *ngIf="!confirmCreateForm.controls.name.valid && confirmCreateForm.controls.name.dirty && confirmCreateForm.value.name.length==0">
 				User Name is <strong>required</strong>
 			</mat-error>
-	</mat-form-field>
-	<mat-form-field appearance="outline">
-		<mat-label>Description</mat-label>
-    <input matInput placeholder="Description" formControlName="description">
-  	<mat-error *ngIf="!confirmCreateForm.controls.description.valid && confirmCreateForm.controls.description.dirty && confirmCreateForm.value.description.length==0">
-			Description <strong>required</strong>
+		</mat-form-field>
+		<mat-form-field appearance="outline" class="col-md-12">
+			<mat-label>Description</mat-label>
+			<textarea matInput placeholder="Description" formControlName="desc"></textarea>
+			<mat-error *ngIf="!confirmCreateForm.controls.desc.valid && confirmCreateForm.controls.desc.dirty && confirmCreateForm.value.desc.length==0">
+				Description <strong>required</strong>
 			</mat-error>
-  </mat-form-field>
-</form>
+		</mat-form-field>
+
+	</form>
 </div>
 <div class="action">
-	<button mat-raised-button color="primary" class (click)="onNoClick()">Cancel</button>
-	<button mat-raised-button color="primary" type="submit" [disabled]="confirmCreateForm.invalid"  (click)="onSubmit(confirmCreateForm.value)">Continue</button>
+	<button mat-raised-button color="warn" class (click)="onNoClick()">Cancel</button>
+	<button mat-raised-button color="primary" type="submit" [disabled]="confirmCreateForm.invalid" (click)="onSubmit(confirmCreateForm.value)">Continue</button>
 </div>

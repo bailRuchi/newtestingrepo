@@ -1,29 +1,43 @@
 <div>
-	<div class="m-subheader ">
+	<div class="m-subheader mb-3">
 		<div class="d-flex align-items-center">
+			<ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+				<li class="m-nav__item" style="margin: 0;">
+					<button (click)="changeMode('grid')" mat-button color="primary"><i style="font-size:20px;" class="fa fa-th-large" [ngClass]="{'onActive':!isValue}"></i>
+					</button>
+				</li>
+				<li class="m-nav__item" style="margin: 0;">
+					<button (click)="changeMode('list')" mat-button color="primary"><i style="font-size:20px;" class="fa fa-th-list" [ngClass]="{'onActive':!isValue}"></i>
+					</button>
+				</li>
+				<li class="m-nav__item" style="margin: 0;">
+					<button mat-button (click)="refresh()" color="primary"><i style="font-size:20px;" class="fas fa-sync-alt" [ngClass]="{'onActive':!isValue}"></i>
+					</button>
+				</li>
+			</ul>
 			<div class="mr-auto">
 			</div>
-			<button class="mb-4"  mat-raised-button color="primary" (click)="openDialog()">
+			<button class="mb-4" mat-raised-button color="primary" (click)="openDialog()" *ngIf="mode != 'grid'">
 				Create New Form
 				<i class="fa fa-plus" aria-hidden="true"></i>
 			</button>
-			<!-- [routerLink]="['/forms/form-builder']" -->
 		</div>
 	</div>
-	<!-- (click)="OnFormRender()" -->
-	<mat-card class="card" *ngFor="let data of serviceList">
-		<mat-card-content class="cardContent">
-			<div>
-				<b>{{data.resourceGroupName}}</b>
-				<div class="font-color">{{data.formName}}</div>
-				<div class="font-color">{{data.formDesc}}</div>
-				<div><img  [src]="(data.formLogo)"></div>
-			</div>
-			<div>
-				<button mat-button color="primary" (click)="OnClickEdit()">EDIT</button>
-				<button mat-button color="accent" (click)="selectUserData(data.resourceGroupId)">DATA SUBMISSION</button>
-				<button mat-button color="warn" (click)="deleteDilogBox(data.resourceGroupId)">DELETE</button>
-			</div>
-		</mat-card-content>
-	</mat-card>
+
+	<div *ngIf="canShow">
+		<grid-view  [serviceList]="serviceList" (valueChange)='displayCounter($event)' *ngIf="mode == 'grid' "></grid-view>
+		<list-view [serviceList]="serviceList" (valueChange)='displayCounter($event)' *ngIf="mode != 'grid' "></list-view>
+	</div>
+	<div *ngIf="!canShow" class="can-show">
+		<h3>Data Not Found</h3>
+		<!--<div class="row mn-grid-parent">-->
+			<!--<div class="col-12 col-sm-6 col-lg-4 offset-sm-3 offset-lg-4 mn-grid-container">-->
+				<!--<mat-card class="card mn-card mn-new-form-container">-->
+					<!--<mat-card-content  class="cardContent mn-new-form-content">-->
+						<!-- <button mat-button color="warn" (click)="openDialog()"><i style="font-size:50px;" class="fa fa-plus-square pt-1"></i><div>NEW FORM</div></button> -->
+					<!--</mat-card-content>-->
+				<!--</mat-card>-->
+			<!--</div>-->
+		<!--</div>-->
+	</div>
 </div>

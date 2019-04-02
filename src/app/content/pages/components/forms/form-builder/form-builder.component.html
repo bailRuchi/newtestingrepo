@@ -46,7 +46,7 @@
 		</div>
 	</div>
 	<div class="form-io-altered container-fluid">
-		<form-builder [form]="form" (change)="onChange($event)" (submit)="onSubmit($event)"></form-builder>
+		<form-builder *ngIf="form" [form]="form" (change)="onChange($event)" (submit)="onSubmit($event)"></form-builder>
 	</div>
 	<pre id="json" ><code class="language-json" #json></code></pre>
 </div>

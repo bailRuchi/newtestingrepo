@@ -47,11 +47,31 @@ import { LayoutRefService } from './core/services/layout/layout-ref.service';
 import { SplashScreenService } from './core/services/splash-screen.service';
 import { DataTableService } from './core/services/datatable.service';
 import { CanActiveGuard} from '../app/content/pages/auth/authgaurd';
-
+import {
+	SocialLoginModule,
+	AuthServiceConfig,
+	FacebookLoginProvider,
+	GoogleLoginProvider
+} from "angular-6-social-login";
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	// suppressScrollX: true
 };
+export function getAuthServiceConfigs() {
+	let config = new AuthServiceConfig([
+		{
+			id: FacebookLoginProvider.PROVIDER_ID,
+			provider: new FacebookLoginProvider("383858135766611")
+		},
+		{
+			id: GoogleLoginProvider.PROVIDER_ID,
+			provider: new GoogleLoginProvider("442633534598-0r2am1cm10m728ihvfn1la7ceiqfr0av.apps.googleusercontent.com") // ADD ID HERE :)
+		}
+	]);
+	return config;
 
+
+	
+}
 @NgModule({
 	declarations: [AppComponent],
 	imports: [
@@ -59,6 +79,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 		BrowserModule,
 		AppRoutingModule,
 		HttpClientModule,
+		SocialLoginModule,
 		// environment.isMockEnabled ? HttpClientInMemoryWebApiModule.forRoot(FakeApiService) : [],
 		LayoutModule,
 		PartialsModule,
@@ -72,6 +93,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 	],
 	providers: [
 		// AclService,
+		{
+			provide: AuthServiceConfig,
+			useFactory: getAuthServiceConfigs
+		},
 		CanActiveGuard,
 		LayoutConfigService,
 		LayoutConfigStorageService,

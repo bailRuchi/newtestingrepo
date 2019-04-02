@@ -10,9 +10,11 @@ export class CanActivateRouteGuard implements CanDeactivate<CanComponentDeactiva
   canDeactivate(component: CanComponentDeactivate,
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot) {
-
-    let url: string = state.url;
-    return component.canDeactivate ? component.canDeactivate() : true;
+    if (localStorage.getItem('currentUser')) {
+      return component.canDeactivate ? component.canDeactivate() : true;
+    } else {
+      return true;
+    }
   }
 
 }

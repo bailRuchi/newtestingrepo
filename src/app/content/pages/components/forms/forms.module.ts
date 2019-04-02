@@ -22,9 +22,11 @@ import { ConfirmDeleteDilogBoxComponent } from './confirm-delete-dilog-box/confi
 import { AuthGuardService } from './guards/auth-guard.service';
 import { CanActivateRouteGuard } from './guards/deactive.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { InterseptorService } from '../../../../core/auth/interseptor.service';
-import { ErrorInterseptorService } from '../../../../core/auth/error-interseptor.service';
-import { DialogService } from './dialog.service'
+import { DialogService } from './dialog.service';
+import { CoreModule } from '../../../../core/core.module';
+import { GridViewComponent } from './form-data-list/gridView';
+import { ListViewComponent } from './form-data-list/listView';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -38,6 +40,7 @@ import { DialogService } from './dialog.service'
     MaterialModule,
     TranslateModule,
     MatProgressBarModule,
+    CoreModule,
     RouterModule.forChild([
       {
         path: '',
@@ -58,12 +61,13 @@ import { DialogService } from './dialog.service'
           path: 'form-builder',
           component: FormCreateComponent,
           canDeactivate: [CanActivateRouteGuard],
-          // canActivate: [AuthGuardService],
+          canActivate: [AuthGuardService],
           resolve: { message: ResolverService }
 
         }, {
           path: 'form-builder/:id',
           component: FormCreateComponent,
+          canDeactivate: [CanActivateRouteGuard],
           resolve: { message: ResolverService }
         },
         {
@@ -87,16 +91,6 @@ import { DialogService } from './dialog.service'
     DialogService,
     ApiService,
     AuthGuardService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: InterseptorService,
-      multi: true
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorInterseptorService,
-      multi: true
-    },
     AuthGuardService,
     CanActivateRouteGuard
   ],
@@ -107,7 +101,9 @@ import { DialogService } from './dialog.service'
     FormCreateComponent,
     FormRenderComponent,
     CreateNewFormDilogComponent,
-    ConfirmDeleteDilogBoxComponent
+    ConfirmDeleteDilogBoxComponent,
+    GridViewComponent,
+    ListViewComponent
   ]
 })
 export class FormDataModule { }

@@ -1,8 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Angular5Csv } from 'angular5-csv/dist/Angular5-csv';
 import { MatSnackBar } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../../../../../../core/services/api.service';
+import { environment } from '../../../../../../../environments/environment'
 declare let jsPDF: any;
 @Component({
   selector: 'm-user-select-list',
@@ -22,15 +25,44 @@ export class FormDataComponent implements OnInit {
   dataToBePrint = [];
   newData = [];
   expotedTableKey = [];
-  constructor(private snackBar: MatSnackBar) { }
+  formId = '';
+  canShow: boolean;
+  data: any;
+  getDataList:any;
+  constructor(
+    private snackBar: MatSnackBar,
+    private route: ActivatedRoute,
+    private apiService: ApiService,
+    private _change: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
-    this.createTable();
+    this.formId = this.route.snapshot.paramMap.get("id");
+   this.getDataList = this.apiService.getTypeRequest(`${environment["data_url"]}/getAllDataByFormId`, this.formId).subscribe(res => {
+      if (res && res['response'].length) {
+        this.canShow = true;
+        let dataToBesubmit = [];
+        res['response'].forEach((value) => {
+          let data = {}
+          value.data.forEach(val => {
+            data[val.label] = val.value;
+          })
+          dataToBesubmit.push(data);
+        })
+        this.data = res['response'];
+        this.createTable(dataToBesubmit);
+        this._change.detectChanges();
+      }
+      else {
+        this.canShow = false
+      }
+    })
   }
-  createTable() {
+  onTableKeyChange(){}
+
+  createTable(dataToBesubmit) {
     let data: any = {
-      "data": [{ "textField2": "weew", "textArea2": "4234234234", "checkbox2": true, "radio2": "", "number2": 323423, "submit": true, "textField21": "weew", "textArea21": "4234234234", "checkbox21": true, "radio21": "", "number21": 323423, "submit1": true },
-      ]
+      "data": dataToBesubmit
     }
     let first_data = data['data'][0];
     this.keyFileds = Object.keys(first_data);
@@ -50,7 +82,7 @@ export class FormDataComponent implements OnInit {
       this.dataSource.sort = this.sort;
     }
   }
-  
+
 
   modifyTable() {
     this.displayedColumns = this.tableKey;
@@ -98,7 +130,6 @@ export class FormDataComponent implements OnInit {
       })
       rows.push(temp);
     });
-    console.log(rows);
     var doc: any = new jsPDF('p', 'pt');
     doc.autoTable(col, rows);
     doc.save('table.pdf');
@@ -111,11 +142,11 @@ export class FormDataComponent implements OnInit {
         let tabledata = JSON.parse(JSON.stringify(this.expotedTableKey));
         tabledata.splice(index + 1, 1, this.expotedTableKey[index]);
         tabledata.splice(index, 1, preIndexValue);
-        console.log("tabledata", tabledata)
         this.expotedTableKey = JSON.parse(JSON.stringify(tabledata));
         this.tableKey = JSON.parse(JSON.stringify(tabledata));
 
       }
+
     }
   }
   applyFilter(filterValue: string) {
@@ -142,13 +173,15 @@ export class FormDataComponent implements OnInit {
     }
   }
   popTableData() {
-    console.log("this.selectedtableKey", this.selectedtableKey)
     if (this.selectedtableKey) {
       this.expotedTableKey.splice(this.expotedTableKey.indexOf(this.selectedtableKey), 1)
-      // this.tableKey.splice(this.expotedTableKey.indexOf(this.selectedtableKey), 1)
     }
   }
   pushTableData() {
     this.expotedTableKey = this.tableKey;
+  }
+
+  ngOnDestroy() {
+    this.getDataList.unsubscribe();
   }
 }

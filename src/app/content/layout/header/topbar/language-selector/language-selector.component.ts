@@ -1,5 +1,5 @@
 import { filter } from 'rxjs/operators';
-import { Component, ElementRef, HostBinding, OnInit} from '@angular/core';
+import { Component, ElementRef, HostBinding, OnInit,ChangeDetectorRef } from '@angular/core';
 import { TranslationService } from '../../../../../core/services/translation.service';
 import { NavigationStart, Router } from '@angular/router';
 
@@ -19,7 +19,7 @@ export class LanguageSelectorComponent implements OnInit {
 	@HostBinding('class') classes = 'm-nav__item m-topbar__languages m-dropdown m-dropdown--small m-dropdown--arrow m-dropdown--align-right m-dropdown--header-bg-fill m-dropdown--mobile-full-width';
 	@HostBinding('attr.m-dropdown-toggle') mDropdownToggle = 'click';
 	language: LanguageFlag;
-
+	lang: any
 	languages: LanguageFlag[] = [
 		{
 			lang: 'en',
@@ -34,7 +34,8 @@ export class LanguageSelectorComponent implements OnInit {
 	constructor(
 		private translationService: TranslationService,
 		private router: Router,
-		private el: ElementRef
+		private el: ElementRef,
+		private _change: ChangeDetectorRef
 	) { }
 
 	ngOnInit() {
@@ -51,6 +52,9 @@ export class LanguageSelectorComponent implements OnInit {
 			if (language.lang === lang) {
 				language.active = true;
 				this.language = language;
+				this.lang=this.language.country_lang
+				this._change.detectChanges()	
+				
 			} else {
 				language.active = false;
 			}

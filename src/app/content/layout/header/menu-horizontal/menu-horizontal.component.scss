@@ -3,3 +3,22 @@
 	float: right;
 	margin-top: 10px !important;
 }
+
+.m--img-rounded {
+	border-radius: 8%;
+}
+
+.m-dropdown .m-dropdown__wrapper .m-dropdown__header {
+	padding: 20px 18px 20px 14px;
+}
+
+.m-card-user .m-card-user__details .m-card-user__email {
+	font-size: 10px;
+	font-weight: 500;
+}
+.m-card-user .m-card-user__pic img{
+	border-radius: 8%;	
+}
+.logout{
+	text-align: right;
+}

@@ -1,0 +1,17 @@
+		<mat-card class="card" *ngFor="let data of serviceList">
+			<mat-card-content class="cardContent">
+				<div class="data-logo">
+					<div> <img image style="height: 45px;" [src]="(data.logo)"></div>
+					<div class="data-description">
+						<b> {{data.resourceGroupName}}</b>
+						<div class="font-color">{{data.name}}</div>
+						<div class="font-color">{{data.desc}}</div>
+					</div>
+				</div>
+				<div>
+					<button mat-button color="primary" (click)="OnClickEdit(data.id)">EDIT</button>
+					<button mat-button color="accent" (click)="selectUserData(data.id)">DATA SUBMISSION</button>
+					<button mat-button color="warn" (click)="deleteDilogBox(data.id)">DELETE</button>
+				</div>
+			</mat-card-content>
+		</mat-card>

@@ -1,9 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { serviceFormList } from '../../../../../../assets/serviceFormsFDOList'
+import { Component, OnInit, ChangeDetectorRef, OnDestroy, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { CreateNewFormDilogComponent } from '../create-new-form-dilog/create-new-form-dilog.component';
 import { ConfirmDeleteDilogBoxComponent } from '../confirm-delete-dilog-box/confirm-delete-dilog-box.component';
+import { ApiService } from '../../../../../core/services/api.service';
+import { environment } from '../../../../../../environments/environment'
+import 'rxjs/Rx';
 @Component({
   selector: 'm-data-list',
   templateUrl: './form-data-list.component.html',
@@ -12,53 +14,69 @@ import { ConfirmDeleteDilogBoxComponent } from '../confirm-delete-dilog-box/conf
 export class FormsDataListComponent implements OnInit {
   serviceList: any;
   CanActivate;
+  canShow: boolean;
+  onActive = false;
+  getDataList: any;
+  userSubscription;
+  // mode = localStorage.getItem('mode');
+  mode = 'grid';
   constructor(
     private router: Router,
     private _change: ChangeDetectorRef,
-    public dialog: MatDialog) { }
+    private apiservice: ApiService,
+    public dialog: MatDialog) {
+    if (!this.mode) {
+      // localStorage.setItem('mode', 'list');
+      this.mode = 'list';
+    }
+  }
 
   ngOnInit() {
-    this.serviceList = serviceFormList.formsList;
+    this.getList();
+
+  }
+
+  changeMode(type) {
+    // localStorage.setItem('mode', type);
+    this.mode = type;
+  }
+  refresh() {
+    this.getList();
+  }
+
+  getList() {
+    const id = "1"
+    this.getDataList = this.apiservice.getTypeRequest(`${environment["api_url"]}/getFormsByOwnerId`, id).subscribe(res => {
+      if (res) {
+        this.canShow = true;
+        this.serviceList = res['response'];
+        this._change.detectChanges();
+      } else {
+        this.canShow = false;
+      }
+      this._change.detectChanges();
+    });
   }
 
   selectUserData(id) {
     this.router.navigate(["/forms/form-data", id]);
   }
-  OnClickEdit() {
-    this.CanActivate =true;
-    localStorage.setItem('CanActivate',this.CanActivate);
-    let id = 2;
-    if(id){
-    this.router.navigate(["/forms/form-builder", id]);
+  OnClickEdit(id) {
+    this.CanActivate = true;
+    localStorage.setItem('CanActivate', this.CanActivate);
+    if (id) {
+      this.router.navigate(["/forms/form-builder", id]);
     }
   }
- 
+
   openDialog(): void {
     this.router.navigate(["/forms/form-builder"]);
-
-    // const dialogRef = this.dialog.open(CreateNewFormDilogComponent, {
-    //   width: '300px',
-    //   data: {}
-    // });
-
-    // dialogRef.afterClosed().subscribe(result => {
-    // });
+  }
+  displayCounter(value) {
+    this.getList()
   }
 
-  async deleteDilogBox(id) {
-    const dialogRef = await this.dialog.open(ConfirmDeleteDilogBoxComponent, {
-      width: '300px',
-      data: {}
-    });
-    dialogRef.afterClosed().subscribe((result: boolean) => {
-      if (result) {
-        this.deleteList(id)
-      }
-    });
-  }
-
-  async deleteList(id) {
-    this.serviceList = await this.serviceList.filter(e => e.resourceGroupId != id)
-    this._change.detectChanges();
+  ngOnDestroy() {
+    this.getDataList.unsubscribe();
   }
 }

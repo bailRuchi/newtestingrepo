@@ -9,9 +9,23 @@
 }
 
 
-.mat-tree-save{
-padding: 10px;
+.mat-tree-save {
+	padding: 10px;
 }
-.ab{
-	display: none !important;
+
+.example-tree-invisible {
+	display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+	margin-top: 0;
+	margin-bottom: 0;
+	list-style-type: none;
+}
+
+.example-tree {
+	display: flex;
+	justify-content: space-between;
+	padding:20px;
 }

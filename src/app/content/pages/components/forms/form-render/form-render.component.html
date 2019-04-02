@@ -1,8 +1,9 @@
-<div class="formRender">
+<div class="formRender"  *ngIf="formData &&  formData.components">
 	<formio [form]="formData" (submit)="onSubmit($event)" (change)="onChange($event)"[submission]='formSubmissionData'>
 	</formio>
+	
 </div>
 
-<!-- <div class="dataNotFound" *ngIf="FormjsonData && FormjsonData.length==0">
+<div class="dataNotFound" *ngIf=" formData && formData.components && formData.components.length==0">
 	<h1>Form not Created</h1>
-</div> -->
+</div>

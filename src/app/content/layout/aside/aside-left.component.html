@@ -3,6 +3,11 @@
 <!-- <div mMenuAsideOffcanvas id="m_aside_left" class="m-grid__item m-aside-left" [ngClass]="asideLeftClasses"> -->
 <!-- BEGIN: Aside Menu -->
 <div mMenuAside (mouseenter)="mouseEnter($event)" (mouseleave)="mouseLeave($event)" id="m_ver_menu" class="m-aside-menu" m-menu-vertical="1" [ngClass]="classInitService.onClassesUpdated$ | async | mGetObject:'aside_menu' | mJoin" [attr.m-menu-dropdown]="menuAsideService.isDropdown" [attr.m-menu-dropdown-timeout]="menuAsideService.dropdownTimeout" [attr.m-menu-scrollable]="menuAsideService.isScrollable">
+	<!-- <div class="m-stack__item m-stack__item--middle m-brand__logo logo-image">
+		<a routerLink="/" class="m-brand__logo-wrapper">
+			<img alt="" src="../../../../../assets/img/Mann-India-logo-new.png">
+		</a>
+	</div> -->
 	<ul class="m-menu__nav" [ngClass]="classInitService.onClassesUpdated$ | async | mGetObject:'aside_menu_nav' | mJoin">
 		<ng-container [ngTemplateOutlet]="mMenuListing"></ng-container>
 	</ul>
@@ -21,7 +26,7 @@
 	<li class="m-menu__item" [ngClass]="{ 'm-menu__item--submenu': item.submenu, 'm-menu__item--active' : !item.submenu && isMenuItemIsActive(item), 'm-menu__item--open' : item.submenu && isMenuItemIsActive(item) }" aria-haspopup="true">
 
 		<!-- if menu item hasn't submenu -->
-		<a *ngIf="!item.submenu" [routerLink]="item.page"  class="m-menu__link m-menu__toggle" [matTooltip]="item.tooltip" matTooltipPosition="left">
+		<a *ngIf="!item.submenu" [routerLink]="item.page" class="m-menu__link m-menu__toggle" [matTooltip]="item.tooltip" matTooltipPosition="left">
 			<ng-container [ngTemplateOutlet]="mMenuItemText" [ngTemplateOutletContext]="{ item: item, parentItem: parentItem }"></ng-container>
 		</a>
 		<!-- if menu item has sumnenu child  -->
@@ -56,14 +61,17 @@
 	<ng-container *ngIf="!item.badge; else mMenuLinkBadge">
 		<!-- menu item title text -->
 		<span class="m-menu__link-text" [translate]="item.translate">
+
 			{{item.title}}
 		</span>
 	</ng-container>
 
 	<ng-template #mMenuLinkBadge>
+
 		<!-- menu item with badge -->
 		<span class="m-menu__link-title">
 			<span class="m-menu__link-wrap">
+
 				<span class="m-menu__link-text" [translate]="item.translate">{{item.title}}</span>
 				<span class="m-menu__link-badge">
 					<span class="m-badge" [ngClass]="item.badge.type">{{item.badge.value | translate}}</span>

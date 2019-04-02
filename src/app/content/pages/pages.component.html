@@ -9,6 +9,8 @@
 		</button>
 		<ng-container *ngIf="asideLeftDisplay">
 			<m-aside-left></m-aside-left>
+			<mat-progress-bar mode="indeterminate" style="position: absolute;" *ngIf="loader | async" class="green-progress">
+			</mat-progress-bar>
 		</ng-container>
 		<!-- END:: Aside Left -->
 

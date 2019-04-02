@@ -9,20 +9,10 @@ import { startWith, tap, delay } from 'rxjs/operators';
   encapsulation: ViewEncapsulation.None
 })
 export class FormsDataComponent implements OnInit {
-  loader: boolean;
-  constructor(private _loadingService: LoadingService) { }
+  constructor() { }
 
   ngOnInit() {
 
   }
-  ngAfterViewInit() {
-    this._loadingService.loader.pipe(
-      startWith(null),
-      delay(0),
-      tap((loader) => this.loader = loader)
-    ).subscribe();
-  }
-
-
 
 }

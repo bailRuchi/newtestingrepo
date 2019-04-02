@@ -7,7 +7,7 @@
 <!-- <m-auth-notice></m-auth-notice> -->
 
 <!--begin::Form-->
-<form class="m-login__form m-form" name="form" novalidate [formGroup]="loginForm">
+<!-- <form class="m-login__form m-form" name="form" novalidate [formGroup]="loginForm">
 	<div class="form-group">
 		<mat-form-field>
 			<mat-label>Email</mat-label>
@@ -29,28 +29,31 @@
 			</mat-error>
 		</mat-form-field>
 	</div>
-	<!-- <div class="form-group">
+
+</form> -->
+<!-- <div class="form-group">
 		<mat-checkbox [(ngModel)]="model.remember_me" #remember_me="ngModel" [ngModelOptions]="{standalone: true}">Keep me signed in</mat-checkbox>
 	</div> -->
-</form>
 <!--end::Form-->
 <!--begin::Options-->
 <div class="m-login__options">
-		<a (click)="submitLogin('facebook')" mat-raised-button color="primary">
-			<span>
-				<i class="fab fa-facebook-f"></i>&nbsp;
-				<span>Facebook</span>
-			</span>
-		</a>
-		<a (click)="submitLogin('google')" mat-raised-button color="warn">
-			<span>
-				<i class="fab fa-google"></i>&nbsp;
-				<span>Google</span>
-			</span>
-		</a>
-	</div>
-	<!--end::Options-->
-<!--begin::Action-->
-<div class="m-login__action m-login__action--fit">
-	<m-spinner-button [options]="spinner" (click)="onLogin(loginForm.value)">Login</m-spinner-button>
+	<a (click)="submitLogin('facebook')" mat-raised-button color="primary">
+		<span>
+			<i class="fab fa-facebook-f"></i>&nbsp;
+			<span>Facebook</span>
+		</span>
+	</a>&nbsp;
+	<a (click)="submitLogin('google')" mat-raised-button color="warn">
+		<span>
+			<i class="fab fa-google"></i>&nbsp;
+			<span>Google</span>
+		</span>
+	</a>
+	
 </div>
+
+<!--end::Options-->
+<!--begin::Action-->
+<!-- <div class="m-login__action m-login__action--fit">
+	<m-spinner-button [options]="spinner" (click)="onLogin(loginForm.value)">Login</m-spinner-button>
+</div> -->
