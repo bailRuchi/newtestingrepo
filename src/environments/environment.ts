@@ -1,9 +1,14 @@
-// The file contents for the current environment will overwrite these during build.
-// The build system defaults to the dev environment which uses `environment.ts`, but if you do
-// `ng build --env=prod` then `environment.prod.ts` will be used instead.
-// The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
   production: false,
-  base_url: "https://mhweu-dpll-app-server-01-dev.azurewebsites.net/",
+  base_url: "http://192.168.1.147:8080/",
+  api_url: "forms/api/v1/forms",
+  data_url: "data/api/v1/data",
+  apiVersion: "1.0",
+  SUCCESS_CODE: "0000",
+  BASE_CODE: "2000",
+  FAILURE_CODE: "0001",
+  EXCEPTION_CAUGHT: "XXXX",
+  userManagement: "user/api/v1/user/",
+  googleLogout:"https://accounts.google.com/o/oauth2/revoke"
 };
